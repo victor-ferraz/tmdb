@@ -1,0 +1,24 @@
+# Output products list for <lfifo>
+_xmsgs\pn_parser.xmsgs
+fifo_generator_ug175.pdf
+fifo_generator_v8_3_readme.txt
+lfifo.asy
+lfifo.gise
+lfifo.ngc
+lfifo.sym
+lfifo.v
+lfifo.veo
+lfifo.xco
+lfifo.xise
+lfifo_flist.txt
+lfifo_ste\example_design\lfifo_top.ucf
+lfifo_ste\example_design\lfifo_top.vhd
+lfifo_ste\example_design\lfifo_top.xdc
+lfifo_ste\implement\implement.bat
+lfifo_ste\implement\implement.sh
+lfifo_ste\implement\planAhead_rdn.bat
+lfifo_ste\implement\planAhead_rdn.sh
+lfifo_ste\implement\planAhead_rdn.tcl
+lfifo_ste\implement\xst.prj
+lfifo_ste\implement\xst.scr
+lfifo_xmdf.tcl

@@ -1,0 +1,351 @@
+T   300.0
+SYN 1
+-- Enable all sectors, data from test memory, pipeline = 0, phase = 0
+WS  A0800004 09 00011000 -- BA31 sector control: 
+WS  A0800008 09 00011000 -- BA32 sector control: 
+WS  A080000C 09 00011000 -- BA01 sector control: 
+WS  A0800010 09 00011000 -- BA02 sector control: 
+WS  A0800014 09 00011000 -- EC47 sector control: 
+WS  A0800018 09 00011000 -- EC00 sector control: 
+WS  A080001C 09 00011000 -- EC01 sector control: 
+WS  A0800020 09 00011000 -- EC02 sector control: 
+WS  A0800024 09 00011000 -- EC03 sector control: 
+WS  A0800028 09 00011000 -- EC04 sector control: 
+WS  A080002C 09 00011000 -- FW00 sector control: 
+WS  A0800030 09 00011000 -- FW01 sector control: 
+WS  A0800034 09 00011000 -- FW02 sector control: 
+RS  A0800004 09 00011000 -- BA31 sector control:
+RS  A0800014 09 00011000 -- EC47 sector control: 
+-- Enable the BCID check
+WS  A08380F8 09 00001FFF
+RS  A08380F8 09 00001FFF
+-- Initialize the pT decoder LUTs
+WS  A0838000 09 00004081
+WS  A0838004 09 00020408
+WS  A0838008 09 00004081
+WS  A083800C 09 00020408
+WS  A0838010 09 00004081
+WS  A0838014 09 00020408
+WS  A0838018 09 00004081
+WS  A083801C 09 00020408
+WS  A0838020 09 00004081
+WS  A0838024 09 00020408
+WS  A0838028 09 00004081
+WS  A083802C 09 00020408
+WS  A0838030 09 00004081
+WS  A0838034 09 00020408
+WS  A0838038 09 00004081
+WS  A083803C 09 00020408
+WS  A0838040 09 00004081
+WS  A0838044 09 00020408
+WS  A0838048 09 00004081
+WS  A083804C 09 00020408
+WS  A0838050 09 00004081
+WS  A0838054 09 00020408
+WS  A0838058 09 00004081
+WS  A083805C 09 00020408
+WS  A0838060 09 00004081
+WS  A0838064 09 00020408
+WS  A0838068 09 00004081
+WS  A083806C 09 00020408
+WS  A0838070 09 00004081
+WS  A0838074 09 00020408
+WS  A0838078 09 00004081
+WS  A083807C 09 00020408
+WS  A0838080 09 00004081
+WS  A0838084 09 00020408
+WS  A0838088 09 00004081
+WS  A083808C 09 00020408
+WS  A0838090 09 00004081
+WS  A0838094 09 00020408
+WS  A0838098 09 00004081
+WS  A083809C 09 00020408
+WS  A08380A0 09 00004081
+WS  A08380A4 09 00020408
+WS  A08380A8 09 00004081
+WS  A08380AC 09 00020408
+WS  A08380B0 09 00004081
+WS  A08380B4 09 00020408
+WS  A08380B8 09 00004081
+WS  A08380BC 09 00020408
+WS  A08380C0 09 00004081
+WS  A08380C4 09 00020408
+WS  A08380C8 09 00004081
+WS  A08380CC 09 00020408
+RSM A0838000 09 00004081 0003FFFF
+RSM A0838004 09 00020408 0003FFFF
+-- Set the thresholds for local trigger output 0
+WS  A083C000 09 0000003C -- Barrel sector BA31 trigger on pT >= 3
+WS  A083C020 09 0000003F -- Barrel sector EC02 trigger on pT > 0
+RSM A083C000 09 0000003C 00000FFF
+RSM A083C020 09 0000003F 00000FFF
+-- Set the thresholds for local trigger output 1
+--WS  A083E030 09 0000003F -- Barrel sector FW02 trigger on pT > 0    
+--RSM A083E030 09 0000003F 00000FFF
+--  Readout setup
+WS  A0800400 09 00007F00 -- Readout control: enable MIBAK & busy, enable readout & monitoring, enable zero-suppression
+WS  A0800408 09 00000405 -- Readout window = 0, pipeline length = 4
+WS  A080040C 09 0000000A -- Module number = 10
+RSM A080040C 09 0000000A 000000FF -- Module number = 10
+WS  A0800430 09 00003820 -- Derandomizer busy threshold = 504, readout FIFO threshold = 8096
+RS  A0800430 09 00003820 -- Read FIFO threshold register
+--  Wait for memory initialization
+T   1000.0
+--  Write a multiplicity counter test pattern to the test memory
+WB  A07FF700 0B 576 
+01f87c3e 01f87c3e 01f87c3e 01f87c3e 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01f8fc7e 01f8fc7e 01f8fc7e 37940000 3001b800 71942800 
+01c87c02 09f87c3e 09f87c3e 09f87c3e 09fbfdfe 09fbfdfe 09fbfdfe 09fbfdfe 09fbfdfe 09fbfdfe 09f8fc7e 09f8fc7e 09f8fc7e 37980000 30000000 71940000 
+01c87c04 11c87c04 11f87c3e 11f87c3e 11fbfdfe 11fbfdfe 11fbfdfe 11fbfdfe 11fbfdfe 11fbfdfe 11f8fc7e 11f8fc7e 11f8fc7e 379c0000 30000000 71940000 
+01c87c06 19c87c06 19c87c06 19f87c3e 19fbfdfe 19fbfdfe 19fbfdfe 19fbfdfe 19fbfdfe 19fbfdfe 19f8fc7e 19f8fc7e 19f8fc7e 37a00000 300eee00 71945400 
+01c87c08 21c87c08 21c87c08 21c87c08 21fbfdfe 21fbfdfe 21fbfdfe 21fbfdfe 21fbfdfe 21fbfdfe 21f8fc7e 21f8fc7e 21f8fc7e 37a40000 30011000 71942800 
+01c87c0a 29c87c0a 29c87c0a 29c87c0a 29cbfc0a 29fbfdfe 29fbfdfe 29fbfdfe 29fbfdfe 29fbfdfe 29f8fc7e 29f8fc7e 29f8fc7e 37a80208 30000000 71940000 
+01c87c0c 31c87c0c 31c87c0c 31c87c0c 31cbfc0c 31cbfc0c 31fbfdfe 31fbfdfe 31fbfdfe 31fbfdfe 31f8fc7e 31f8fc7e 31f8fc7e 37ac0000 30000000 71960000 
+01c87c0e 39c87c0e 39c87c0e 39c87c0e 39cbfc0e 39cbfc0e 39cbfc0e 39fbfdfe 39fbfdfe 39fbfdfe 39f8fc7e 39f8fc7e 39f8fc7e 00000000 3004ee00 71965400 
+01d07c10 01f87c3e 01f87c3e 01f87c3e 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01f8fc7e 01f8fc7e 01f8fc7e 00040000 30000000 71960000 
+01d07c12 09c87c12 09f87c3e 09f87c3e 09fbfdfe 09fbfdfe 09fbfdfe 09fbfdfe 09fbfdfe 09fbfdfe 09f8fc7e 09f8fc7e 09f8fc7e 00080001 30000000 71960000 
+01d07c14 11c87c14 11c87c14 11f87c3e 11fbfdfe 11fbfdfe 11fbfdfe 11fbfdfe 11fbfdfe 11fbfdfe 11f8fc7e 11f8fc7e 11f8fc7e 000c0000 30000000 71960000 
+01d07c16 19c87c16 19c87c16 19c87c16 19fbfdfe 19fbfdfe 19fbfdfe 19fbfdfe 19fbfdfe 19fbfdfe 19f8fc7e 19f8fc7e 19f8fc7e 00100000 30000000 71960000 
+01d07c18 21c87c18 21c87c18 21c87c18 21cbfc18 21fbfdfe 21fbfdfe 21fbfdfe 21fbfdfe 21fbfdfe 21f8fc7e 21f8fc7e 21f8fc7e 00140000 30000000 71960000 
+01d07c1a 29c87c1a 29c87c1a 29c87c1a 29cbfc1a 29cbfc1a 29fbfdfe 29fbfdfe 29fbfdfe 29fbfdfe 29f8fc7e 29f8fc7e 29f8fc7e 00180000 30000000 71960000 
+01d07c1c 31c87c1c 31c87c1c 31c87c1c 31cbfc1c 31cbfc1c 31cbfc1c 31fbfdfe 31fbfdfe 31fbfdfe 31f8fc7e 31f8fc7e 31f8fc7e 001c0000 30000000 71960000 
+01d07c1e 39c87c1e 39c87c1e 39c87c1e 39cbfc1e 39cbfc1e 39cbfc1e 39cbfc1e 39fbfdfe 39fbfdfe 39f8fc7e 39f8fc7e 39f8fc7e 00200000 30000400 71960400 
+01d07c20 01d07c20 01f87c3e 01f87c3e 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01f8fc7e 01f8fc7e 01f8fc7e 00240000 30000000 71960000 
+01d07c22 09d07c22 09c87c22 09f87c3e 09fbfdfe 09fbfdfe 09fbfdfe 09fbfdfe 09fbfdfe 09fbfdfe 09f8fc7e 09f8fc7e 09f8fc7e 00280008 30000000 71960000 
+01d07c24 11d07c24 11c87c24 11c87c24 11fbfdfe 11fbfdfe 11fbfdfe 11fbfdfe 11fbfdfe 11fbfdfe 11f8fc7e 11f8fc7e 11f8fc7e 002c0000 30000000 71960000 
+01d07c26 19d07c26 19c87c26 19c87c26 19cbfc26 19fbfdfe 19fbfdfe 19fbfdfe 19fbfdfe 19fbfdfe 19f8fc7e 19f8fc7e 19f8fc7e 00300000 30000000 71960000 
+01d07c28 21d07c28 21c87c28 21c87c28 21cbfc28 21cbfc28 21fbfdfe 21fbfdfe 21fbfdfe 21fbfdfe 21f8fc7e 21f8fc7e 21f8fc7e 00340000 30000000 71960000 
+01d07c2a 29d07c2a 29c87c2a 29c87c2a 29cbfc2a 29cbfc2a 29cbfc2a 29fbfdfe 29fbfdfe 29fbfdfe 29f8fc7e 29f8fc7e 29f8fc7e 00380000 30000000 71960000 
+01d07c2c 31d07c2c 31c87c2c 31c87c2c 31cbfc2c 31cbfc2c 31cbfc2c 31cbfc2c 31fbfdfe 31fbfdfe 31f8fc7e 31f8fc7e 31f8fc7e 003c0000 30000000 71960000 
+01d07c2e 39d07c2e 39c87c2e 39c87c2e 39cbfc2e 39cbfc2e 39cbfc2e 39cbfc2e 39cbfc2e 39fbfdfe 39f8fc7e 39f8fc7e 39f8fc7e 00400000 30004400 71961400 
+01d07c00 01d07c30 01d07c30 01f87c3e 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01f8fc7e 01f8fc7e 01f8fc7e 00440000 30000000 71960000 
+01d07c02 09d07c32 09d07c32 09c87c02 09fbfdfe 09fbfdfe 09fbfdfe 09fbfdfe 09fbfdfe 09fbfdfe 09f8fc7e 09f8fc7e 09f8fc7e 00480008 30000000 71960000 
+01d07c04 11d07c34 11d07c34 11c87c04 11cbfc34 11fbfdfe 11fbfdfe 11fbfdfe 11fbfdfe 11fbfdfe 11f8fc7e 11f8fc7e 11f8fc7e 004c0000 30000000 71960000 
+01d07c06 19d07c36 19d07c36 19c87c06 19cbfc36 19cbfc36 19fbfdfe 19fbfdfe 19fbfdfe 19fbfdfe 19f8fc7e 19f8fc7e 19f8fc7e 00500000 30000000 71960000 
+01d07c08 21d07c00 21d07c00 21c87c08 21cbfc38 21cbfc38 21cbfc38 21fbfdfe 21fbfdfe 21fbfdfe 21f8fc7e 21f8fc7e 21f8fc7e 00540000 30000000 71960000 
+01d07c0a 29d07c02 29d07c02 29c87c0a 29cbfc3a 29cbfc3a 29cbfc3a 29cbfc3a 29fbfdfe 29fbfdfe 29f8fc7e 29f8fc7e 29f8fc7e 00580000 30000000 71960000 
+01d07c0c 31d07c04 31d07c04 31c87c0c 31cbfc3c 31cbfc3c 31cbfc3c 31cbfc3c 31cbfc3c 31fbfdfe 31f8fc7e 31f8fc7e 31f8fc7e 005c0000 30000000 71960000 
+01d07c0e 39d07c06 39d07c06 39c87c0e 39cbfc3e 39cbfc3e 39cbfc3e 39cbfc3e 39cbfc3e 39cbfc3e 39f8fc7e 39f8fc7e 39f8fc7e 00600000 30004400 71961400 
+01d07c10 01d07c08 01d07c08 01d07c10 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01f8fc7e 01f8fc7e 01f8fc7e 00640000 30000000 71960000 
+01d07c12 09d07c0a 09d07c0a 09d07c12 09cbfc42 09fbfdfe 09fbfdfe 09fbfdfe 09fbfdfe 09fbfdfe 09f8fc7e 09f8fc7e 09f8fc7e 00680008 30000000 71960000 
+01d07c14 11d07c0c 11d07c0c 11d07c14 11cbfc44 11cbfc44 11fbfdfe 11fbfdfe 11fbfdfe 11fbfdfe 11f8fc7e 11f8fc7e 11f8fc7e 006c0000 30000000 71960000 
+01d07c16 19d07c0e 19d07c0e 19d07c16 19cbfc46 19cbfc46 19cbfc46 19fbfdfe 19fbfdfe 19fbfdfe 19f8fc7e 19f8fc7e 19f8fc7e 00700000 30000400 71960400 
+-- Check the memory data
+RB  A07FF700 0B 16 
+01f87c3e 01f87c3e 01f87c3e 01f87c3e 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01fbfdfe 01f8fc7e 01f8fc7e 01f8fc7e 37940000 3001b800 71942800 
+RB  A07FFFC0 0B 16 
+01d07c16 19d07c0e 19d07c0e 19d07c16 19cbfc46 19cbfc46 19cbfc46 19fbfdfe 19fbfdfe 19fbfdfe 19f8fc7e 19f8fc7e 19f8fc7e 00700000 30000400 71960400 
+-- Setup test memory to generate sector data
+WS  A0800808 09 0001FFDC -- Memory start address: -36
+WS  A0800804 09 0000E000 -- Memory write enable: write multiplicity & BCID
+WS  A0800810 09 00000062 -- Memory BCID offset: -10
+WS  A0800800 09 0000001D -- Memory control: continous, TST internal = 1, start
+RS  A0800800 09 0000001C
+-- Wait for 4 orbits
+T   10000.0
+-- Stop memory
+WS  A0800800 09 00000002 -- Memory control: stop
+-- Enable all sectors, external input, pipeline = 0, phase = 1, insert BCID
+WS  A0800004 09 01001100 -- BA31 sector control: 
+WS  A0800008 09 01001100 -- BA32 sector control: 
+WS  A080000C 09 01001100 -- BA01 sector control: 
+WS  A0800010 09 01001100 -- BA02 sector control: 
+WS  A0800014 09 01001100 -- EC47 sector control: 
+WS  A0800018 09 01001100 -- EC00 sector control: 
+WS  A080001C 09 01001100 -- EC01 sector control: 
+WS  A0800020 09 01001100 -- EC02 sector control: 
+WS  A0800024 09 01001100 -- EC03 sector control: 
+WS  A0800028 09 01001100 -- EC04 sector control: 
+WS  A080002C 09 01001100 -- FW00 sector control: 
+WS  A0800030 09 01001100 -- FW01 sector control: 
+WS  A0800034 09 01001100 -- FW02 sector control: 
+RS  A0800004 09 01001100 -- BA31 sector control:
+RS  A0800014 09 01001100 -- EC47 sector control: 
+-- Setup to write sector data to memory
+WS  A0800800 09 00000028 -- Memory control: single-shot, TST internal = 0, use trigger
+WS  A0800808 09 0001FFF0 -- Memory start address
+WS  A0800804 09 0000FFFF -- Memory write enable: write all words
+WS  A0800800 09 00000029 -- Memory control: start
+RS  A0800800 09 00000028
+T   1800.0
+RS  A080080C 09 00000000 -- Read status
+RS  A0800808 09 0001FFFF -- Read memory address
+RS  A07FFF00 09 01010101 -- Read from memory for BA02
+RS  A07FFF40 09 01010101 -- Read from memory for BA02
+RS  A07FFF80 09 01010101 -- Read from memory for BA02
+RS  A07FFFC0 09 01010101 -- Read from memory for BA02
+T   100.0
+-- T   2300.0               -- Wait for memory initialization
+WS  A07FFC08 09 01010101 -- Write memory for BA01
+WS  A07FFC48 09 02020202 -- Write memory
+WS  A07FFC88 09 04040404 -- Write memory
+WS  A07FFCC8 09 08080808 -- Write memory
+WS  A07FFD08 09 10101010 -- Write memory
+WS  A07FFD48 09 20202020 -- Write memory
+WS  A07FFD88 09 40404040 -- Write memory
+WS  A07FFDC8 09 80808080 -- Write memory
+WS  A07FFE08 09 01010101 -- Write memory for BA01
+WS  A07FFE48 09 02020202 -- Write memory
+WS  A07FFE88 09 04040404 -- Write memory
+WS  A07FFEC8 09 08080808 -- Write memory
+WS  A07FFF08 09 10101010 -- Write memory
+WS  A07FFF48 09 20202020 -- Write memory
+WS  A07FFF88 09 40404040 -- Write memory
+WS  A07FFFC8 09 80808080 -- Write memory
+T   150.0
+RS  A07FFC08 09 01010101 -- Read from memory
+RS  A07FFFC8 09 80808080 -- Read from memory
+--
+WS  A0800004 09 00001000 -- Enable BA31
+WS  A0800008 09 00001000 -- Enable BA32
+WS  A080000C 09 00100000 -- Enable BA01 output
+WS  A0800010 09 00001000 -- Enable BA02
+WS  A0800804 09 0000E001 -- Memory write enable: write to BA02
+WS  A0800808 09 0001FFF0 -- Memory start address
+RS  A080080C 09 0001FFF0 -- Read memory start address
+WS  A0800800 09 00001101 -- Memory control: single-shot, TST internal = 1, start
+T   200.0
+RS  A080080C 09 00000000 -- Read status
+RS  A0800808 09 0001FFFF -- Read memory address
+RS  A07FFF00 09 01010101 -- Read from memory for BA02
+RS  A07FFF40 09 01010101 -- Read from memory for BA02
+RS  A07FFF80 09 01010101 -- Read from memory for BA02
+RS  A07FFFC0 09 01010101 -- Read from memory for BA02
+T   100.0
+-- More memory tests
+WS  A0000018 09 12345678
+WS  A000003C 09 87654321
+RS  A0000018 09 12345678
+RS  A000003C 09 87654321
+--WB  A07FF800 09 DEADBEEF 64
+--RB  A07FF800 09 DEADBEEF 64
+-- Main FPGA ASMI device ID read
+WS  A0802004 09 00000001
+RS  A0802004 09 00000100 -- busy = 1
+T   2000.0
+RS  A0802004 09 00000000 -- busy = 0 
+WS  A0802010 09 00123456 -- byte address
+RS  A0802010 09 00123456 
+WS  A0802000 09 00000001 -- read command
+RS  A0802000 09 00000100 -- busy = 1
+T   2200.0
+RS  A0802000 09 00000000 -- busy = 0
+-- L1Topo mode
+WS  A080c800 09 00000002
+RSM A080c800 09 00000002 0000000F
+-- L1Topo fixed phrase
+WS  A080c804 09 FFFFFFFF
+RSM A080c804 09 FFFFFFFF FFFFFFFF
+-- L1Topo fixed phrase
+WS  A080c808 09 000000FF
+RSM A080c808 09 000000FF 000000FF
+-- L1Topo eta/phi LUTs
+WS  A0808000 09 00000041
+WS  A0808004 09 00000000
+WS  A0808008 09 00000041
+WS  A080800C 09 00000FFF
+RSM A0808000 09 00000041 00000FFF
+RSM A0808004 09 00000000 00000FFF
+RSM A0808008 09 00000041 00000FFF
+RSM A080800C 09 00000FFF 00000FFF
+-- L1Topo pt LUT
+WS  A080c000 09 00000001
+WS  A080c004 09 00000000
+WS  A080c008 09 00000001
+WS  A080c00C 09 0000000F
+RSM A080c000 09 00000001 0000000F
+RSM A080c004 09 00000000 0000000F
+RSM A080c008 09 00000001 0000000F
+RSM A080c00C 09 0000000F 0000000F
+-- EC-EC ovelap LUT
+WS  A0834000 09 00000001
+WS  A0834004 09 00000002
+WS  A0834008 09 00000004
+WS  A083400C 09 00000008
+RSM A0834000 09 00000001 000FFFFF
+RSM A0834004 09 00000002 000FFFFF
+RSM A0834008 09 00000004 000FFFFF
+RSM A083400C 09 00000008 000FFFFF
+-- 1-Wire master
+WS  A0880030 09 0000008E -- Clock division
+WS  A0880030 09 0000008E -- Clock division
+WS  A088002C 09 00000009 -- Interrupt enable register
+RS  A088002C 09 00000009 -- Read interrupt enable
+T   5000.0
+WS  A0880020 09 00000001 -- 1-Wire reset
+RS  A0880020 09 00000001 -- Read command register
+RS  A0880028 09 00000001 -- Read interupt status
+T   2500.0
+RS  A0880020 09 00000000 -- Read command register
+RS  A0880028 09 00000001 -- Read interupt status
+T   2500.0
+RS  A0880020 09 00000000 -- Read command register
+RS  A0880028 09 00000001 -- Read interupt status
+T   2500.0
+-- VME FPGA ASMI device ID read
+RS  A0880804 09 00000000
+WS  A0880804 09 00000001
+RS  A0880804 09 00000100
+T   500.0
+RS  A0880800 09 00000000
+-- Main FPGA ASMI programming
+RS  A0802004 09 00000000
+WS  A0802004 09 00000001
+RS  A0802004 09 00000000
+-- Per-bunch monitoring counters
+WS  A087C00C 09 00000000 -- clear counters
+RS  A087C00C 09 00000001 -- check status
+RS  A0874000 09 00000000 -- read turn counter
+RS  A0840000 09 00000000 -- read BA31 counter, BCID0
+RS  A0840000 09 00000004 -- read BA31 counter, BCID1
+RS  A0840000 09 00000008 -- read BA31 counter, BCID2
+-- Check the internal TST synchronization
+RS  A080080C 09 00000000 -- Read memory status
+WS  A0800800 09 00000018 -- Memory control: TST internal = 1
+RS  A080080C 09 00000000 -- Read memory status
+T   500.0                -- Wait for BCR
+RS  A080080C 09 01000000 -- Memory status: TST level = 1
+WS  A0800800 09 00000008 -- Memory control: TST internal = 0
+T   500.0                -- Wait for BCR
+RS  A080080C 09 00000000 -- Memory status: TST level = 0
+T   500.0                -- Wait for memory initialization
+-- SPI access
+WS  A1000210 09 00000080 -- CR, enable SPI, clk div. 4
+RS  A1000210 09 00000080 -- read CR
+WS  A1000220 09 00000001 -- SSR, enable slave 0
+WS  A1000228 09 000000DE -- TR, send data 0xDE
+WS  A1000210 09 000000A0 -- CR, start command
+T   800.0
+RS  A1000200 09 00000000 -- SR read
+WS  A1000228 09 000000AD -- TR, send data 0xAD
+T   800.0
+RS  A1000200 09 00000000 -- SR read
+WS  A1000210 09 00000080 -- CR, clear start command
+RS  A1000200 09 00000000 -- SR read
+RS  A1000230 09 00000000 -- RR read
+-- TBC access
+RS  A1000300 09 00000000 -- read command register
+WS  A1000300 09 00000055 -- write command register
+T   100.0
+-- EPCS programming access
+WS  A1000000 09 00000042 --- Initialize data register
+WS  A1000008 09 00000001 --- Enable EPCS programming port
+WS  A1000000 09 00000003 --- Toggle DCLK 
+WS  A1000000 09 00000002 --- Toggle DCLK 
+WS  A1000000 09 00000001 --- Clear nCONFIG
+RS  A1000000 09 00000001 --- Read back the result
+RS  A1000004 09 00000001 --- Read the status register
+T   100.0
+-- Main FPGA access
+WS  A0000000 09 12345678 --- Write to MIOCT FPGA
+RS  A0000004 09 DEADBEEF --- Read from MIOCT FPGA
+--WB  A0001000 0B 55555555 16.0 --- Write burst
+--RB  A0002000 0B 55555555 16.0 --- Read burst
+T   100.0
+-- Loading Pt LUT
+WF  A080c000 09 128 data\topo_pt_lut.dat     -- Write Pt LU
+-- Loading Eta Phi LUT
+WF  A0808000 09 4096 data\topo_eta_phi_lut.dat -- Write Eta Phi LUT
+-- Reading Pt LUT
+RF  A080c000 09 0000000F 128 data\receivedf_pt_lut.dat -- Received File Pt LUT
+-- Reading Eta Phi LUT
+RF  A0808000 09 00000FFF 4096 data\receivedf_et_lut.dat -- Received File Et LUT

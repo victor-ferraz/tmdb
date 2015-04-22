@@ -1,0 +1,586 @@
+##############################################################################
+# Institutions:	UFRJ - Federal University of Rio de Janeiro
+#						UFJF - Federal Univesity of Juiz de Fora
+# Engineers:	Julio Souza Vieira		(julio.souza@cern.ch)
+#					Rafael Gonçalves Gama	(rafael.gama@cern.ch)
+#					Victor Araujo Ferraz		(victor.ferraz@cern.ch)
+#
+# Create Date: 13/03/2015
+# Design Name: tmdb_core
+# Module Name: tmdb_core.ucf
+# Target Device: Spartan-6 XC6SLX150T-FGG676
+# Tool versions: Xilinx ISE Design Suite 14.7
+# Description:
+#    
+# Dependencies:
+# 
+# Additional Comments:
+# 
+##############################################################################
+
+# Input clock periods. These duplicate the values entered for the
+#  input clocks. You can use these to time your system
+#----------------------------------------------------------------
+
+NET "CLK_IN" TNM_NET = "CLK_IN";
+TIMESPEC TS_CLK_IN = PERIOD "CLK_IN" 24.95 ns HIGH 50 % INPUT_JITTER 249.5 ps;
+#OFFSET = IN 25 ns VALID 25 ns BEFORE "CLK_IN";
+
+
+#
+# Clock Inputs
+###############################################################################
+
+NET "CLK_IN" IOSTANDARD = LVTTL;
+NET "CLK_IN" LOC = AC14;
+
+
+#
+# Clock Outputs
+###############################################################################
+
+NET "CLK_OUT*" IOSTANDARD = LVTTL;
+NET "CLK_OUT[15]" LOC = N21;
+NET "CLK_OUT[14]" LOC = N22;
+NET "CLK_OUT[13]" LOC = P21;
+NET "CLK_OUT[12]" LOC = P22;
+NET "CLK_OUT[11]" LOC = AC26;
+NET "CLK_OUT[10]" LOC = AC25;
+NET "CLK_OUT[9]" LOC = AB26;
+NET "CLK_OUT[8]" LOC = AB24;
+NET "CLK_OUT[7]" LOC = AA26;
+NET "CLK_OUT[6]" LOC = AA25;
+NET "CLK_OUT[5]" LOC = Y26;
+NET "CLK_OUT[4]" LOC = Y24;
+NET "CLK_OUT[3]" LOC = W26;
+NET "CLK_OUT[2]" LOC = W25;
+NET "CLK_OUT[1]" LOC = V26;
+NET "CLK_OUT[0]" LOC = V24;
+
+
+#
+# TTC Input
+###############################################################################
+
+NET "TTC*" IOSTANDARD = LVTTL;
+
+NET "TTC_BCNT[0]" LOC = H20;
+NET "TTC_BCNT[1]" LOC = G20;
+NET "TTC_BCNT[2]" LOC = B24;
+NET "TTC_BCNT[3]" LOC = A25;
+NET "TTC_BCNT[4]" LOC = K18;
+NET "TTC_BCNT[5]" LOC = K19;
+NET "TTC_BCNT[6]" LOC = D23;
+NET "TTC_BCNT[7]" LOC = C24;
+NET "TTC_BCNT[8]" LOC = H21;
+NET "TTC_BCNT[9]" LOC = H22;
+NET "TTC_BCNT[10]" LOC = F22;
+NET "TTC_BCNT[11]" LOC = G23;
+NET "TTC_EVCNTRES" LOC = J20;
+NET "TTC_EVCNTHSTR" LOC = J22;
+NET "TTC_EVCNTLSTR" LOC = E23;
+NET "TTC_BCNTSTR" LOC = E24;
+NET "TTC_BCNTRES" LOC = L19;
+NET "TTC_L1ACCEPT" LOC = K20;
+
+# packing TTC Input Flip-Flops to IOB
+INST "fragGen.FragmentGen_i/l1aR*"			IOB = TRUE; 
+INST "fragGen.FragmentGen_i/bCntR*"			IOB = TRUE; 
+INST "fragGen.FragmentGen_i/bCntResR*"		IOB = TRUE; 
+INST "fragGen.FragmentGen_i/bCntStrR*"		IOB = TRUE; 
+INST "fragGen.FragmentGen_i/evCntResR*"	IOB = TRUE; 
+INST "fragGen.FragmentGen_i/evCntLStrR*"	IOB = TRUE; 
+INST "fragGen.FragmentGen_i/evCntHStrR*"	IOB = TRUE; 
+
+#
+# ADC Inputs
+###############################################################################
+
+NET "adc_in*" IOSTANDARD = LVTTL;
+
+# M1D5L
+NET "adc_in[0]" LOC =G7;
+NET "adc_in[1]" LOC =H8;
+NET "adc_in[2]" LOC =G8;
+NET "adc_in[3]" LOC =F7;
+NET "adc_in[4]" LOC =F6;
+NET "adc_in[5]" LOC =C3;
+NET "adc_in[6]" LOC =B3;
+NET "adc_in[7]" LOC =G6;
+
+# M1D5R
+NET "adc_in[8]" LOC =F5;
+NET "adc_in[9]" LOC =E6;
+NET "adc_in[10]" LOC =E5;
+NET "adc_in[11]" LOC =H9;
+NET "adc_in[12]" LOC =G9;
+NET "adc_in[13]" LOC =A3;
+NET "adc_in[14]" LOC =A2;
+NET "adc_in[15]" LOC =F9;
+
+# M1D6L
+NET "adc_in[16]" LOC =E8;
+NET "adc_in[17]" LOC =D5;
+NET "adc_in[18]" LOC =C5;
+NET "adc_in[19]" LOC =H10;
+NET "adc_in[20]" LOC =G10;
+NET "adc_in[21]" LOC =B4;
+NET "adc_in[22]" LOC =A4;
+NET "adc_in[23]" LOC =F10;
+
+# M1D6R
+NET "adc_in[24]" LOC =E10;
+NET "adc_in[25]" LOC =B5;
+NET "adc_in[26]" LOC =A5;
+NET "adc_in[27]" LOC =G12;
+NET "adc_in[28]" LOC =F11;
+NET "adc_in[29]" LOC =F12;
+NET "adc_in[30]" LOC =E12;
+NET "adc_in[31]" LOC =J11;
+
+# M2D5L
+NET "adc_in[32]" LOC =G11;
+NET "adc_in[33]" LOC =H12;
+NET "adc_in[34]" LOC =G13;
+NET "adc_in[35]" LOC =E13;
+NET "adc_in[36]" LOC =D13;
+NET "adc_in[37]" LOC =C13;
+NET "adc_in[38]" LOC =A13;
+NET "adc_in[39]" LOC =A12;
+
+# M2D5R
+NET "adc_in[40]" LOC =B14;
+NET "adc_in[41]" LOC =A14;
+NET "adc_in[42]" LOC =K12;
+NET "adc_in[43]" LOC =J12;
+NET "adc_in[44]" LOC =J13;
+NET "adc_in[45]" LOC =H13;
+NET "adc_in[46]" LOC =F14;
+NET "adc_in[47]" LOC =E14;
+
+# M2D6L
+NET "adc_in[48]" LOC =K14;
+NET "adc_in[49]" LOC =H14;
+NET "adc_in[50]" LOC =J15;
+NET "adc_in[51]" LOC =H15;
+NET "adc_in[52]" LOC =J16;
+NET "adc_in[53]" LOC =J17;
+NET "adc_in[54]" LOC =F16;
+NET "adc_in[55]" LOC =E16;
+
+# M2D6R
+NET "adc_in[56]" LOC =G15;
+NET "adc_in[57]" LOC =F15;
+NET "adc_in[58]" LOC =F18;
+NET "adc_in[59]" LOC =E18;
+NET "adc_in[60]" LOC =G16;
+NET "adc_in[61]" LOC =F17;
+NET "adc_in[62]" LOC =F20;
+NET "adc_in[63]" LOC =E20;
+
+# M3D5L
+NET "adc_in[64]" LOC =H17;
+NET "adc_in[65]" LOC =G17;
+NET "adc_in[66]" LOC =C21;
+NET "adc_in[67]" LOC =B21;
+NET "adc_in[68]" LOC =H18;
+NET "adc_in[69]" LOC =H19;
+NET "adc_in[70]" LOC =B22;
+NET "adc_in[71]" LOC =A22;
+
+# M3D5R
+NET "adc_in[72]" LOC =G19;
+NET "adc_in[73]" LOC =F19;
+NET "adc_in[74]" LOC =B23;
+NET "adc_in[75]" LOC =A23;
+NET "adc_in[76]" LOC =D21;
+NET "adc_in[77]" LOC =D22;
+NET "adc_in[78]" LOC =N17;
+NET "adc_in[79]" LOC =N18;
+
+# M3D6L
+NET "adc_in[80]" LOC =L23;
+NET "adc_in[81]" LOC =L24;
+NET "adc_in[82]" LOC =N19;
+NET "adc_in[83]" LOC =N20;
+NET "adc_in[84]" LOC =P17;
+NET "adc_in[85]" LOC =P19;
+NET "adc_in[86]" LOC =N23;
+NET "adc_in[87]" LOC =N24;
+
+# M3D6R
+NET "adc_in[88]" LOC =R18;
+NET "adc_in[89]" LOC =R19;
+NET "adc_in[90]" LOC =R20;
+NET "adc_in[91]" LOC =R21;
+NET "adc_in[92]" LOC =P24;
+NET "adc_in[93]" LOC =P26;
+NET "adc_in[94]" LOC =R23;
+NET "adc_in[95]" LOC =R24;
+
+# M4D5L
+NET "adc_in[96]" LOC =T22;
+NET "adc_in[97]" LOC =T23;
+NET "adc_in[98]" LOC =U23;
+NET "adc_in[99]" LOC =U24;
+NET "adc_in[100]" LOC =R25;
+NET "adc_in[101]" LOC =V23;
+NET "adc_in[102]" LOC =W24;
+NET "adc_in[103]" LOC =U25;
+
+# M4D5R (*)
+NET "adc_in[104]" LOC =U26;
+NET "adc_in[105]" LOC =T24;
+NET "adc_in[106]" LOC =T26;
+NET "adc_in[107]" LOC =AD24;
+NET "adc_in[108]" LOC =AD26;
+NET "adc_in[109]" LOC =AE25;
+NET "adc_in[110]" LOC =AE26;
+NET "adc_in[111]" LOC =U21;
+
+# M4D6L
+NET "adc_in[112]" LOC =U22;
+NET "adc_in[113]" LOC =T19;
+NET "adc_in[114]" LOC =T20;
+NET "adc_in[115]" LOC =AA23;
+NET "adc_in[116]" LOC =AA24;
+NET "adc_in[117]" LOC =U19;
+NET "adc_in[118]" LOC =U20;
+NET "adc_in[119]" LOC =V20;
+
+# M4D6R
+NET "adc_in[120]" LOC =V21;
+NET "adc_in[121]" LOC =AC23;
+NET "adc_in[122]" LOC =AC24;
+NET "adc_in[123]" LOC =Y21;
+NET "adc_in[124]" LOC =AA22;
+NET "adc_in[125]" LOC =AF23;
+NET "adc_in[126]" LOC =W20;
+NET "adc_in[127]" LOC =Y20;
+
+# M5D5L
+NET "adc_in[128]" LOC =AB22;
+NET "adc_in[129]" LOC =AC22;
+NET "adc_in[130]" LOC =V18;
+NET "adc_in[131]" LOC =W19;
+NET "adc_in[132]" LOC =AF22;
+NET "adc_in[133]" LOC =W17;
+NET "adc_in[134]" LOC =W18;
+NET "adc_in[135]" LOC =AA21;
+
+# M5D5R
+NET "adc_in[136]" LOC =AB21;
+NET "adc_in[137]" LOC =Y17;
+NET "adc_in[138]" LOC =AA17;
+NET "adc_in[139]" LOC =U15;
+NET "adc_in[140]" LOC =V16;
+NET "adc_in[141]" LOC =AA19;
+NET "adc_in[142]" LOC =AB19;
+NET "adc_in[143]" LOC =W16;
+
+# M5D6L
+NET "adc_in[144]" LOC =Y16;
+NET "adc_in[145]" LOC =AA18;
+NET "adc_in[146]" LOC =AB17;
+NET "adc_in[147]" LOC =Y15;
+NET "adc_in[148]" LOC =AA16;
+NET "adc_in[149]" LOC =V14;
+NET "adc_in[150]" LOC =V15;
+NET "adc_in[151]" LOC =U13;
+
+# M5D6R
+NET "adc_in[152]" LOC =V13;
+NET "adc_in[153]" LOC =AA15;
+NET "adc_in[154]" LOC =AB15;
+NET "adc_in[155]" LOC =AE15;
+NET "adc_in[156]" LOC =AF15;
+NET "adc_in[157]" LOC =AB14;
+NET "adc_in[158]" LOC =AE13;
+NET "adc_in[159]" LOC =AF13;
+
+# M6D5L
+NET "adc_in[160]" LOC =AD14;
+NET "adc_in[161]" LOC =AF14;
+NET "adc_in[162]" LOC =Y12;
+NET "adc_in[163]" LOC =AA12;
+NET "adc_in[164]" LOC =W14;
+NET "adc_in[165]" LOC =Y13;
+NET "adc_in[166]" LOC =V12;
+NET "adc_in[167]" LOC =W12;
+
+# M6D5R
+NET "adc_in[168]" LOC =AB13;
+NET "adc_in[169]" LOC =AA13;
+NET "adc_in[170]" LOC =Y11;
+NET "adc_in[171]" LOC =AA11;
+NET "adc_in[172]" LOC =V11;
+NET "adc_in[173]" LOC =V10;
+NET "adc_in[174]" LOC =AA9;
+NET "adc_in[175]" LOC =AB9;
+
+# M6D6L
+NET "adc_in[176]" LOC =AA10;
+NET "adc_in[177]" LOC =AB11;
+NET "adc_in[178]" LOC =AD6;
+NET "adc_in[179]" LOC =AF6;
+NET "adc_in[180]" LOC =W10;
+NET "adc_in[181]" LOC =W9;
+NET "adc_in[182]" LOC =AE5;
+NET "adc_in[183]" LOC =AF5;
+
+# M6D6R
+NET "adc_in[184]" LOC =Y9;
+NET "adc_in[185]" LOC =AA8;
+NET "adc_in[186]" LOC =AB7;
+NET "adc_in[187]" LOC =AC6;
+NET "adc_in[188]" LOC =AC5;
+NET "adc_in[189]" LOC =AD5;
+NET "adc_in[190]" LOC =W8;
+NET "adc_in[191]" LOC =W7;
+
+# M7D5L
+NET "adc_in[192]" LOC =AD4;
+NET "adc_in[193]" LOC =AF4;
+NET "adc_in[194]" LOC =AA7;
+NET "adc_in[195]" LOC =AA6;
+NET "adc_in[196]" LOC =AF3;
+NET "adc_in[197]" LOC =AB5;
+NET "adc_in[198]" LOC =AC4;
+NET "adc_in[199]" LOC =AA4;
+
+# M7D5R
+NET "adc_in[200]" LOC =AA3;
+NET "adc_in[201]" LOC =Y6;
+NET "adc_in[202]" LOC =Y5;
+NET "adc_in[203]" LOC =AB4;
+NET "adc_in[204]" LOC =AC3;
+NET "adc_in[205]" LOC =V7;
+NET "adc_in[206]" LOC =V6;
+NET "adc_in[207]" LOC =U4;
+
+# M7D6L
+NET "adc_in[208]" LOC =U3;
+NET "adc_in[209]" LOC =V5;
+NET "adc_in[210]" LOC =W5;
+NET "adc_in[211]" LOC =U9;
+NET "adc_in[212]" LOC =U8;
+NET "adc_in[213]" LOC =U7;
+NET "adc_in[214]" LOC =T6;
+NET "adc_in[215]" LOC =AB3;
+
+# M7D6R
+NET "adc_in[216]" LOC =AB1;
+NET "adc_in[217]" LOC =AD3;
+NET "adc_in[218]" LOC =AD1;
+NET "adc_in[219]" LOC =AC2;
+NET "adc_in[220]" LOC =AC1;
+NET "adc_in[221]" LOC =AE2;
+NET "adc_in[222]" LOC =AE1;
+NET "adc_in[223]" LOC =AA2;
+
+# M8D5L
+NET "adc_in[224]" LOC =AA1;
+NET "adc_in[225]" LOC =Y3;
+NET "adc_in[226]" LOC =Y1;
+NET "adc_in[227]" LOC =W2;
+NET "adc_in[228]" LOC =W1;
+NET "adc_in[229]" LOC =V3;
+NET "adc_in[230]" LOC =V1;
+NET "adc_in[231]" LOC =U2;
+
+# M8D5R
+NET "adc_in[232]" LOC =U1;
+NET "adc_in[233]" LOC =T3;
+NET "adc_in[234]" LOC =U5;
+NET "adc_in[235]" LOC =T4;
+NET "adc_in[236]" LOC =R10;
+NET "adc_in[237]" LOC =T9;
+NET "adc_in[238]" LOC =P3;
+NET "adc_in[239]" LOC =P1;
+
+# M8D6L
+NET "adc_in[240]" LOC =N6;
+NET "adc_in[241]" LOC =P6;
+NET "adc_in[242]" LOC =P5;
+NET "adc_in[243]" LOC =R5;
+NET "adc_in[244]" LOC =N8;
+NET "adc_in[245]" LOC =N7;
+NET "adc_in[246]" LOC =R4;
+NET "adc_in[247]" LOC =R3;
+
+# M8D6R
+NET "adc_in[248]" LOC =R9;
+NET "adc_in[249]" LOC =P8;
+NET "adc_in[250]" LOC =N5;
+NET "adc_in[251]" LOC =N4;
+NET "adc_in[252]" LOC =P10;
+NET "adc_in[253]" LOC =N9;
+NET "adc_in[254]" LOC =M10;
+NET "adc_in[255]" LOC =M9;
+
+# packing ADC Input Flip-Flops to IOB
+INST "adc_r*" IOB = TRUE;
+
+#
+# VME FPGA Interface
+###############################################################################
+
+# Address
+NET "fi_addr*" IOSTANDARD = LVTTL;
+NET "fi_addr[0]" LOC =G25; 
+NET "fi_addr[1]" LOC =G26;
+NET "fi_addr[2]" LOC =K24;
+NET "fi_addr[3]" LOC =K26;
+NET "fi_addr[4]" LOC =J25;
+NET "fi_addr[5]" LOC =J26;
+
+# Data
+NET "fi_data*" IOSTANDARD = LVTTL;
+NET "fi_data[0]" LOC =M24;
+NET "fi_data[1]" LOC =M26;
+NET "fi_data[2]" LOC =L25;
+NET "fi_data[3]" LOC =L26;
+NET "fi_data[4]" LOC =N25;
+NET "fi_data[5]" LOC =N26;
+NET "fi_data[6]" LOC =M21;
+NET "fi_data[7]" LOC =M23;
+
+# Write Strobe (Read ACK)
+NET "fi_write" IOSTANDARD = LVTTL;
+NET "fi_write" LOC =L21;
+
+# Read Strobe (Write ACK)
+NET "fi_read" IOSTANDARD = LVTTL;
+NET "fi_read" LOC =L20;
+
+# packing FPGA Interface Input Flip-Flops to IOB
+INST "fpga_comm_if/r_addr_0*" IOB = TRUE;
+INST "fpga_comm_if/n_fi_data*" IOB = TRUE;
+INST "fpga_comm_if/n_fi_write" IOB = TRUE;
+INST "fpga_comm_if/n_fi_read"	 IOB = TRUE;
+
+#
+# LVDS Connectors 
+###############################################################################
+
+NET "lvds*" IOSTANDARD = LVTTL;
+
+NET "lvdsL_conn[0]" LOC =M1;
+NET "lvdsL_conn[1]" LOC =L2;
+NET "lvdsL_conn[2]" LOC =L1;
+NET "lvdsL_conn[3]" LOC =K3;
+NET "lvdsL_conn[4]" LOC =K1;
+NET "lvdsL_conn[5]" LOC =J2;
+NET "lvdsL_conn[6]" LOC =J1;
+NET "lvdsL_conn[7]" LOC =H3;
+NET "lvdsL_conn[8]" LOC =H1;
+NET "lvdsL_conn[9]" LOC =G2;
+NET "lvdsL_conn[10]" LOC =G1;
+NET "lvdsL_conn[11]" LOC =F3;
+NET "lvdsL_conn[12]" LOC =F1;
+NET "lvdsL_conn[13]" LOC =E2;
+NET "lvdsL_conn[14]" LOC =E1;
+NET "lvdsL_conn[15]" LOC =D3;
+
+NET "lvdsL_TXlo" LOC =M3;
+NET "lvdsL_TXhi" LOC =D1;
+
+NET "lvdsR_conn[0]" LOC =J5;
+NET "lvdsR_conn[1]" LOC =L7;
+NET "lvdsR_conn[2]" LOC =L6;
+NET "lvdsR_conn[3]" LOC =B2;
+NET "lvdsR_conn[4]" LOC =B1;
+NET "lvdsR_conn[5]" LOC =L10;
+NET "lvdsR_conn[6]" LOC =K10;
+NET "lvdsR_conn[7]" LOC =G4;
+NET "lvdsR_conn[8]" LOC =G3;
+NET "lvdsR_conn[9]" LOC =J9;
+NET "lvdsR_conn[10]" LOC =J7;
+NET "lvdsR_conn[11]" LOC =C2;
+NET "lvdsR_conn[12]" LOC =C1;
+NET "lvdsR_conn[13]" LOC =K9;
+NET "lvdsR_conn[14]" LOC =K8;
+NET "lvdsR_conn[15]" LOC =E4;
+
+NET "lvdsR_TXlo" LOC =K5;
+NET "lvdsR_TXhi" LOC =E3;
+
+# packing Busy Output Flip-Flops to IOB
+INST "fragGen.FragmentGen_i/busyOutR"	 IOB = TRUE;
+
+########################### GTP Clock Constraints ########################
+
+# User Clock Constraints
+
+# 200 MHz
+NET "use_gtp.gtp_transceivers/txusrclk_lane0" TNM_NET = "use_gtp.gtp_transceivers/txusrclk_lane0";
+TIMESPEC "TS_gtp_transceivers_txusrclk_lane0" = PERIOD "use_gtp.gtp_transceivers/txusrclk_lane0" 5.0;
+
+# 100 MHz
+NET "use_gtp.gtp_transceivers/txusrclk2_lane0" TNM_NET = "use_gtp.gtp_transceivers/txusrclk2_lane0";
+TIMESPEC "TS_gtp_transceivers_txusrclk2_lane0" = PERIOD "use_gtp.gtp_transceivers/txusrclk2_lane0" 10.0;
+
+# 80.16 MHz
+NET "use_gtp.gtp_transceivers/txusrclk_lanes123" TNM_NET = "use_gtp.gtp_transceivers/txusrclk_lanes123";
+TIMESPEC "TS_gtp_transceivers_txusrclk_lanes123" = PERIOD "use_gtp.gtp_transceivers/txusrclk_lanes123" 12.475;
+
+# 40.08 MHz
+NET "USR_CLK2_LANE[1]" TNM_NET = "USR_CLK2_LANE1";
+TIMESPEC "TS_USR_CLK2_LANE1" = PERIOD "USR_CLK2_LANE1" 24.95;
+
+#NET "use_gtp.gtp_transceivers/pll_clk_80mhz" TNM_NET = "use_gtp.gtp_transceivers/pll_clk_80mhz";
+#TIMESPEC "TS_gtp_transceivers_pll_clk_80mhz" = PERIOD "use_gtp.gtp_transceivers/pll_clk_80mhz" 12.5;
+
+#NET "use_gtp.gtp_transceivers/pll_clk_100mhz" TNM_NET = "use_gtp.gtp_transceivers/pll_clk_100mhz";
+#TIMESPEC "TS_gtp_transceivers_pll_clk_100mhz" = PERIOD "use_gtp.gtp_transceivers/pll_clk_100mhz" 10.0;
+
+######################## locs for top level ports ######################
+
+NET "SFP_ENABLE*" IOSTANDARD = LVTTL;
+
+NET SFP_ENABLE[0] LOC = M18;
+NET SFP_ENABLE[1] LOC = F23;
+NET SFP_ENABLE[2] LOC = J23;
+NET SFP_ENABLE[3] LOC = E25;
+
+# Lane 3 (Only TX is used)
+NET TXN_OUT[3] LOC = A20;
+NET TXP_OUT[3] LOC = B20;
+#NET RXN_IN[3] LOC = C19;
+#NET RXP_IN[3] LOC = D19;
+
+# Lane 2 (Only TX is used)
+NET TXN_OUT[2] LOC = A18;
+NET TXP_OUT[2] LOC = B18;
+#NET RXN_IN[2] LOC = C17;
+#NET RXP_IN[2] LOC = D17;
+
+# Lane 1 (Only TX is used)
+NET TXN_OUT[1] LOC = A8;
+NET TXP_OUT[1] LOC = B8;
+#NET RXN_IN[1] LOC = C9;
+#NET RXP_IN[1] LOC = D9;
+
+# Lane 0
+NET TXN_OUT[0] LOC = A6;
+NET TXP_OUT[0] LOC = B6;
+NET RXN_IN LOC = C7;
+NET RXP_IN LOC = D7;
+
+######################### mgt clock module constraints ########################
+
+#NET TILE0_GTP0_REFCLK_PAD_N_IN  LOC=A10;
+#NET TILE0_GTP0_REFCLK_PAD_P_IN  LOC=B10;
+NET TILE0_GTP1_REFCLK_PAD_N_IN  LOC=C11;
+NET TILE0_GTP1_REFCLK_PAD_P_IN  LOC=D11;
+
+################################# mgt wrapper constraints #####################
+
+##---------- Set placement for tile0_rocketio_wrapper_i/GTPA1_DUAL ------
+
+INST use_gtp.gtp_transceivers/gtp_dual_0_i/tile0_gtp_dual_0_i/gtpa1_dual_i LOC=GTPA1_DUAL_X0Y1;
+INST use_gtp.gtp_transceivers/gtp_dual_1_i/tile0_gtp_dual_1_i/gtpa1_dual_i LOC=GTPA1_DUAL_X1Y1;
+
+#
+# EOF
+###############################################################################

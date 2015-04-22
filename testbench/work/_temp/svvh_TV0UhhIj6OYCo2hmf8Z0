@@ -1,0 +1,55 @@
+-- sig = UM:GQ78WNnZfYSYHLUmLF2
+library verilog;
+use verilog.vl_types.all;
+entity tmdb_core is
+    generic(
+        SIMULATION      : integer := 1;
+        USE_CHIPSCOPE   : integer := 0;
+        USE_GTP         : integer := 0;
+        USE_MPU         : integer := 0;
+        USE_LVDS        : integer := 0;
+        USE_ADC_BUFF    : integer := 1;
+        USE_ROSB        : integer := 0;
+        num_regs        : integer := 41;
+        regs_data_width : integer := 32
+    );
+    port(
+        clk_in          : in     vl_logic;
+        clk_out         : out    vl_logic_vector(15 downto 0);
+        adc_in          : in     vl_logic_vector(255 downto 0);
+        lvdsL_conn      : inout  vl_logic_vector(15 downto 0);
+        lvdsL_TXlo      : out    vl_logic;
+        lvdsL_TXhi      : out    vl_logic;
+        lvdsR_conn      : inout  vl_logic_vector(15 downto 0);
+        lvdsR_TXlo      : out    vl_logic;
+        lvdsR_TXhi      : out    vl_logic;
+        ttc_bcnt        : in     vl_logic_vector(11 downto 0);
+        ttc_bcntstr     : in     vl_logic;
+        ttc_bcntres     : in     vl_logic;
+        ttc_l1accept    : in     vl_logic;
+        ttc_evcntres    : in     vl_logic;
+        ttc_evcntlstr   : in     vl_logic;
+        ttc_evcnthstr   : in     vl_logic;
+        TILE0_GTP1_REFCLK_PAD_N_IN: in     vl_logic;
+        TILE0_GTP1_REFCLK_PAD_P_IN: in     vl_logic;
+        SFP_ENABLE      : out    vl_logic_vector(3 downto 0);
+        RXN_IN          : in     vl_logic;
+        RXP_IN          : in     vl_logic;
+        TXN_OUT         : out    vl_logic_vector(3 downto 0);
+        TXP_OUT         : out    vl_logic_vector(3 downto 0);
+        fi_data         : inout  vl_logic_vector(7 downto 0);
+        fi_addr         : in     vl_logic_vector(5 downto 0);
+        fi_write        : inout  vl_logic;
+        fi_read         : inout  vl_logic
+    );
+    attribute mti_svvh_generic_type : integer;
+    attribute mti_svvh_generic_type of SIMULATION : constant is 1;
+    attribute mti_svvh_generic_type of USE_CHIPSCOPE : constant is 1;
+    attribute mti_svvh_generic_type of USE_GTP : constant is 1;
+    attribute mti_svvh_generic_type of USE_MPU : constant is 1;
+    attribute mti_svvh_generic_type of USE_LVDS : constant is 1;
+    attribute mti_svvh_generic_type of USE_ADC_BUFF : constant is 1;
+    attribute mti_svvh_generic_type of USE_ROSB : constant is 1;
+    attribute mti_svvh_generic_type of num_regs : constant is 1;
+    attribute mti_svvh_generic_type of regs_data_width : constant is 1;
+end tmdb_core;

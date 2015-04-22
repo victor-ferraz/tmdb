@@ -1,0 +1,905 @@
+////////////////////////////////////////////////////////////////////////////////
+// Institutions:	UFRJ - Federal University of Rio de Janeiro
+//						UFJF - Federal Univesity of Juiz de Fora
+// Engineers:	Julio Souza Vieira		(julio.souza@cern.ch)
+//					Rafael Gonçalves Gama	(rafael.gama@cern.ch)
+//					Victor Araujo Ferraz		(victor.ferraz@cern.ch)
+//
+// Create Date: 13/03/2015
+// Design Name: tmdb_core
+// Module Name: tmdb_core.v
+// Target Device: Spartan-6 XC6SLX150T-FGG676
+// Tool versions: Xilinx ISE Design Suite 14.7
+// Description:
+//    
+// Dependencies:
+// 
+// Additional Comments:
+// 
+////////////////////////////////////////////////////////////////////////////////
+
+module tmdb_core #
+(   
+    // Set to 1 if in simulation mode
+    parameter SIMULATION = 1,
+    // If SIMULATION == 1, set USE_CHIPSCOPE = 0 and USE_GTP = 0
+    parameter USE_CHIPSCOPE = 1,
+    parameter USE_GTP = 1,
+    parameter USE_MPU = 1,
+    parameter USE_LVDS = 1,
+    parameter USE_FRAG_GEN = 1,
+    // Registers Parameters
+    parameter REGS_QTY = 17,
+    parameter REGS_DATA_WIDTH = 32,
+    parameter FIRMWARE_VERSION = 10, //v1.0
+	 parameter BOARD_ID = 1
+)
+(
+	// Clock Inputs
+	//input [5:0] clk_in,
+    input         clk_in,
+	//input [1:0] clk_in_pll,
+	
+	// Clock Outputs
+	output [15:0] clk_out,
+	
+	// ADC interface -----------------------------------------------------------
+
+	input [255:0] adc_in,
+	
+	// LVDS Connectors
+	
+	inout [15:0] lvdsL_conn,
+	output 		 lvdsL_TXlo,
+	output		 lvdsL_TXhi,
+	inout [15:0] lvdsR_conn,
+	output		 lvdsR_TXlo,
+	output		 lvdsR_TXhi,
+	
+	// TTC ---------------------------------------------------------------------
+
+	input [11:0] ttc_bcnt,
+	input        ttc_bcntstr,
+	input        ttc_bcntres,
+	input        ttc_l1accept,
+	input        ttc_evcntres,
+	input        ttc_evcntlstr,
+	input        ttc_evcnthstr,
+
+	// External Oscillator for LANE0 ------------------------------------------
+
+	input wire  TILE0_GTP1_REFCLK_PAD_N_IN,
+	input wire  TILE0_GTP1_REFCLK_PAD_P_IN,
+	
+	// SFP enable outputs ----------------------------------------------------
+	output wire  [3:0]   SFP_ENABLE,
+	 
+	// Transceivers I/Os -----------------------------------------------------
+
+    input  wire  	   	 RXN_IN,
+    input  wire  	    	 RXP_IN,
+    output wire  [3:0]   TXN_OUT,
+    output wire  [3:0]   TXP_OUT,
+
+	// FPGA Comm interface ----------------------------------------------------
+
+	inout [7:0] fi_data,
+	input [5:0] fi_addr,
+	inout       fi_write,
+	inout       fi_read
+);
+
+`include "../common/array_conversion.v"
+
+//----------------------------------------------------------------------------- 
+//----------------------------------------------------------------------------- 
+
+// Reset signal ---------------------------------------------------------------
+
+wire		rst;
+
+// Registers signals ----------------------------------------------------------
+
+wire [REGS_QTY*REGS_DATA_WIDTH-1:0] iReg_temp;
+wire [REGS_QTY*REGS_DATA_WIDTH-1:0] oReg_temp;
+wire [REGS_DATA_WIDTH-1:0] iReg [REGS_QTY-1:0];
+wire [REGS_DATA_WIDTH-1:0] oReg [REGS_QTY-1:0];
+`PACK_ARRAY(REGS_DATA_WIDTH, REGS_QTY, iReg, iReg_temp, pak0)
+`UNPACK_ARRAY(REGS_DATA_WIDTH, REGS_QTY, oReg_temp, oReg, unp0)
+wire [REGS_QTY-1:0] pWrite;
+wire [REGS_QTY-1:0] pRead;
+
+// ChipScope signals ----------------------------------------------------------
+
+wire    [35:0]  vio_control;
+wire    [35:0]  ila_control_0;
+wire    [35:0]  ila_control_1;
+wire    [35:0]  ila_control_2;
+
+wire    [7:0]   vio_async_in;
+wire    [7:0]   vio_async_out;
+wire    [7:0]   vio_sync_in;
+wire    [255:0] vio_sync_out;
+
+/******************************************************************************/
+// Clocking 
+/******************************************************************************/
+
+wire [3:0] USR_CLK2_LANE;
+wire       clk;
+
+generate
+if (SIMULATION==1)
+    assign clk = clk_in;
+else
+    assign clk = USR_CLK2_LANE[1];
+endgenerate
+
+clock #
+(
+    .SIMULATION(SIMULATION)
+)
+clock_dist
+(
+	clk,
+	clk_out
+);
+	
+/******************************************************************************/
+// ADC Buffering 
+/******************************************************************************/
+
+reg [255:0] adc_r = 0;
+
+always @ (posedge clk) begin
+	adc_r <= adc_in;
+end
+
+/******************************************************************************/
+// MPU 
+/******************************************************************************/
+
+// The 'weights_m' array holds all the weights for the 32 channels.
+wire [2239:0] weights_m;
+
+// Threshold
+wire [151:0] LT6p;
+wire [151:0] HT6p;
+wire [151:0] LT56p;
+wire [151:0] HT56p;
+
+wire [18:0] lt6;
+wire [18:0] ht6;
+wire [18:0] lt56;
+wire [18:0] ht56;
+
+// Neighbor Communication 
+wire [3:0] ext_mod0;
+wire [3:0] ext_mod9;
+wire [3:0] ext_mod1;
+wire [3:0] ext_mod8;
+
+// SL Outputs
+wire [15:0] sl1;
+wire [15:0] sl2;
+wire [15:0] sl3;
+
+genvar i;
+generate
+if (USE_MPU==1)
+begin : use_mpu
+
+    for (i=0; i<8; i=i+1) begin : threshold
+        assign LT6p[(i*19+19-1):(i*19)]  = lt6;
+        assign HT6p[(i*19+19-1):(i*19)]  = ht6;
+        assign LT56p[(i*19+19-1):(i*19)] = lt56;
+        assign HT56p[(i*19+19-1):(i*19)] = ht56;
+    end
+    
+    MPU # 
+    (
+        .USE_CHIPSCOPE(USE_CHIPSCOPE)
+    )
+    MPU_i
+    (
+        .rst					(rst), 
+        .clk					(clk),
+
+        // ADC converters ----------------------------------------------------------
+
+        .adc_in                 (adc_r),
+        
+        // Weights Matrix ----------------------------------------------------------
+        
+        .weights_m              (weights_m),
+
+        // Threshold --------------------------------------------------------------
+
+        .LT6p                   (LT6p),
+        .HT6p                   (HT6p),
+        .LT56p                  (LT56p),
+        .HT56p                  (HT56p),
+        
+        // Trigger from/to neighbored TMDB -----------------------------------------
+
+        //Input
+        .ext_mod0               (ext_mod0),
+        .ext_mod9               (ext_mod9),
+
+        //Ouput
+        .ext_mod1               (ext_mod1),
+        .ext_mod8               (ext_mod8),
+        
+        // Sector Logic outputs ----------------------------------------------------
+
+        .sl1					(sl1), 
+        .sl2					(sl2), 
+        .sl3					(sl3),
+        
+        // ILA Control ------------------------------------------------------------
+        
+        .ila_control            (ila_control_0)
+    );
+end
+else
+begin : no_mpu
+
+    assign sl1      = 16'h0000;
+    assign sl2      = 16'h0000;
+    assign sl3      = 16'h0000;
+    assign ext_mod1 = 4'h0;
+    assign ext_mod8 = 4'h0;
+    
+    if (USE_CHIPSCOPE==1)
+        null_vio null_vio_0
+        (
+          .control                          (ila_control_0)
+        ); 
+
+end
+endgenerate
+
+/******************************************************************************/
+// Fragment Generator 
+/******************************************************************************/
+
+// Input Wires to Fragment Generator
+wire        fragmentGenEn;
+wire [31:0] sourceIdentifier, runNumber;
+wire        testEn, testSel, adcConstantSel;
+wire        syncSel;
+wire        vmeHolaReset;
+wire [7:0]  l1aLatency;
+wire        LFF_N, LDOWN_N;
+wire        vmeReadEnable;
+wire [3:0]  trg_sel;
+
+// Output Wires from Fragment Generator
+wire        busyOut;
+wire        vmeURESET_N, UCTRL_N, UWEN_N;
+wire [31:0] UD;
+wire        vmeEmptyFlag;
+wire [31:0] vmeData;
+
+generate
+if (USE_FRAG_GEN==1) 
+begin : fragGen
+
+    FragmentGen #
+    (
+        .USE_CHIPSCOPE(USE_CHIPSCOPE)
+    )
+    FragmentGen_i
+    (
+        .rst(rst),
+        .clk(clk),
+        .enable(fragmentGenEn),
+        
+        // Data Fragment Registers ------------------------------------------------
+        
+        .sourceIdentifier(sourceIdentifier),
+        .runNumber(runNumber),
+        
+        // Testing ----------------------------------------------------------------
+        
+        .testEn(testEn),         //1 -> TEST ENABLED ; 0 -> TEST DISABLED
+        .testSel(testSel),       //1 -> TEST MODE    ; 0 -> NORMAL MODE
+        
+        //MUST FIX IT
+        .adcConstantSel(1'b0),   //1 -> ADC CONSTANT ; 0 -> TEST DATA
+        
+        // Sync Selector  ---------------------------------------------------------
+        
+        .syncSel(syncSel),       //1 -> VME          ; 0 -> HOLA
+        
+        // HOLA Reset Request -----------------------------------------------------
+        
+        .holaReset(vmeHolaReset),
+        
+        // BUSY -------------------------------------------------------------------
+        
+        .busyOut(busyOut),
+        
+        // L1a stuff --------------------------------------------------------------
+
+        .l1aLatency(l1aLatency),        
+        .l1a(ttc_l1accept),
+        .bCnt(ttc_bcnt),
+        .bCntRes(ttc_bcntres),
+        .bCntStr(ttc_bcntstr),
+        .evCntRes(ttc_evcntres),
+        .evCntLStr(ttc_evcntlstr),
+        .evCntHStr(ttc_evcnthstr),
+        
+        // ADC interface ----------------------------------------------------------
+        
+        .adcIn(adc_r),
+        
+        // HOLA interface ---------------------------------------------------------
+        
+        .UD(UD),
+        .URESET_N(vmeURESET_N),
+        .UCTRL_N(UCTRL_N),
+        .UWEN_N(UWEN_N),
+        .LFF_N(LFF_N),
+        .LDOWN_N(LDOWN_N),
+        
+        // Register interface (VME) -----------------------------------------------
+        
+        .vmeEmptyFlag(vmeEmptyFlag),
+        .vmeReadEnable(vmeReadEnable),
+        .vmeData(vmeData),
+        
+        // ILA Control ------------------------------------------------------------
+        .trg_sel(trg_sel),
+        .ila_control(ila_control_1)
+    );
+ 
+end
+else
+begin : no_fragGen
+ 
+    assign busyOut      = 1'b1;  //no fragment gen? so it's busy.
+    assign URESET_N     = 1'b1;  //deasserted.
+    assign UCTRL_N      = 1'b1;  //deasserted.
+    assign UWEN_N       = 1'b1;  //deasserted.
+    assign UD           = 32'd0; //zero.
+    assign vmeEmptyFlag = 1'b1;  //empty.
+    assign vmeData      = 32'd0; //zero.
+    
+    if (USE_CHIPSCOPE==1)
+        null_vio null_vio_1
+        (
+          .control                          (ila_control_1)
+        ); 
+    
+end
+endgenerate
+
+/******************************************************************************/
+// GTP Transceivers 
+/******************************************************************************/
+
+wire        URESET_N, UTEST_N;
+wire        LANES123_SYNC_DONE, INT_RESETDONE;
+wire			LANE0_FBPLL_LOCKED, LANES123_FBDCM_LOCKED, PLL_INPUT_LOCKED;
+wire        TESTLED_N, LDERRLED_N, LUPLED_N, FLOWCTLLED_N, ACTIVITYLED_N;
+wire [3:0]  RESET_LANE;
+wire [3:0]  RESET_DONE;
+wire [3:0]  PLL_LOCK_DET;
+wire [15:0] lane1;
+wire [15:0] lane2;
+wire [15:0] lane3;
+wire        lane1_cntl;
+wire        lane1_data;
+wire        lane2_cntl;
+wire        lane2_data;
+wire        lane3_cntl;
+wire        lane3_data;
+
+generate
+if (USE_GTP==1)
+begin : use_gtp
+    
+    wire		gtp1_refclk_buff;
+
+    IBUFDS tile0_gtp1_refclk_ibufds_i
+    (
+      .O                              (gtp1_refclk_buff),
+      .I                              (TILE0_GTP1_REFCLK_PAD_P_IN),
+      .IB                             (TILE0_GTP1_REFCLK_PAD_N_IN)
+    );
+         
+    gtp gtp_transceivers
+    (
+		  .PLL_INPUT_LOCKED				 (PLL_INPUT_LOCKED),
+        .LANES123_FBDCM_LOCKED       (LANES123_FBDCM_LOCKED),
+        .LANES123_SYNC_DONE          (LANES123_SYNC_DONE),
+        // S-LINK interface
+        .LANE0_FBPLL_LOCKED          (LANE0_FBPLL_LOCKED),
+        .INT_RESETDONE               (INT_RESETDONE),
+        .UD									 (UD),
+        .URESET_N							 (URESET_N),
+        .UTEST_N							 (UTEST_N),
+        .UCTRL_N							 (UCTRL_N),
+        .UWEN_N								 (UWEN_N),
+        .UCLK								 (clk),
+        .LFF_N								 (LFF_N),
+        .LRL								 (),     
+        .LDOWN_N							 (LDOWN_N),
+        // S-LINK LEDs
+        .TESTLED_N							 (TESTLED_N),
+        .LDERRLED_N							 (LDERRLED_N),
+        .LUPLED_N							 (LUPLED_N),
+        .FLOWCTLLED_N					     (FLOWCTLLED_N), 
+        .ACTIVITYLED_N					     (ACTIVITYLED_N),
+        // GTP Signals
+        .CLK_IN_40                           (clk_in),
+        .LANE0_REFCLK					     (gtp1_refclk_buff),
+    //	.TILE0_GTP1_REFCLK_PAD_N_IN          (TILE0_GTP1_REFCLK_PAD_N_IN),
+    //	.TILE0_GTP1_REFCLK_PAD_P_IN          (TILE0_GTP1_REFCLK_PAD_P_IN),
+        .USR_CLK2_LANE                       (USR_CLK2_LANE),
+        .PLL_LOCK_DET                        (PLL_LOCK_DET),
+    //	.RX_DATA_LANE0                       (),
+    //	.TX_DATA_LANE0                       (16'h0000),
+        .TX_DATA_LANE1                       (lane1), //sl1
+        .TX_DATA_LANE2                       (lane2), //sl2
+        .TX_DATA_LANE3                       (lane3), //sl3
+        .RX_POWER_DOWN_LANE0                 (2'b00),
+        .TX_POWER_DOWN_LANE0                 (2'b00),
+        .TX_POWER_DOWN_LANE1                 (2'b00),
+        .TX_POWER_DOWN_LANE2                 (2'b00),
+        .TX_POWER_DOWN_LANE3                 (2'b00),
+        .RESET_LANE                          (RESET_LANE),
+        .RESET_DONE                          (RESET_DONE),
+        .SFP_ENABLE                          (SFP_ENABLE),
+        .RXN_IN                              (RXN_IN),
+        .RXP_IN                              (RXP_IN),
+        .TXN_OUT                             (TXN_OUT),
+        .TXP_OUT                             (TXP_OUT),
+        .lane1_cntl                          (lane1_cntl),
+        .lane1_data                          (lane1_data),
+        .lane2_cntl                          (lane2_cntl),
+        .lane2_data                          (lane2_data),
+        .lane3_cntl                          (lane3_cntl),
+        .lane3_data                          (lane3_data),
+        .ILA_CONTROL                         (ila_control_2)
+    );
+
+end
+else
+begin : no_gtp
+    
+    assign LDOWN_N            = 1'b0; //link is down.
+    assign INT_RESETDONE      = 1'b0; //hola internal reset is not done.
+    assign LANE0_FBPLL_LOCKED = 1'b0; //lane 0 feedback pll is not locked.
+    assign TESTLED_N          = 1'b1; //deasserted.
+    assign LDERRLED_N         = 1'b1; //deasserted.
+    assign LUPLED_N           = 1'b1; //deasserted.
+    assign FLOWCTLLED_N       = 1'b1; //deasserted.
+    assign ACTIVITYLED_N      = 1'b1; //deasserted.
+    assign PLL_LOCK_DET       = 3'd0; //pll lock detection is not asserted.
+    
+end
+endgenerate
+
+/******************************************************************************/
+// LVDS Connectors 
+/******************************************************************************/
+
+generate
+if (USE_LVDS==1)
+begin : use_lvds
+	
+    /*
+    reg [15:0] cntr = 0;
+
+    always @ (posedge clk) begin
+        if (rst) begin
+            cntr <= 16'b0;
+        end 
+        else begin
+            cntr <= cntr+1;
+        end	
+    end
+    */
+    
+    //Left LVDS lo byte TX enabled
+    assign lvdsL_TXlo = 1'b1; 
+
+    //Left LVDS hi byte RX enabled
+    assign lvdsL_TXhi = 1'b0;
+    
+    //BusyOut is at the LSB of the Left Connector
+    assign lvdsL_conn[7:0] = {7'b0, busyOut};
+
+    //Right LVDS lo byte TX enabled
+    assign lvdsR_TXlo = 1'b1; 
+
+    assign lvdsR_conn[3:0] = ext_mod1;
+    assign lvdsR_conn[7:4] = ext_mod8;
+
+
+    //Right LVDS hi byte RX enabled
+    assign lvdsR_TXhi = 1'b0;
+
+    assign ext_mod0  = lvdsR_conn[11:8];
+    assign ext_mod9  = lvdsR_conn[15:12];
+
+end
+else
+begin : no_lvds
+    
+    //Left LVDS lo byte RX enabled
+    assign lvdsL_TXlo = 1'b0; 
+    //Left LVDS hi byte RX enabled
+    assign lvdsL_TXhi = 1'b0;
+    //Right LVDS lo byte RX enabled
+    assign lvdsR_TXlo = 1'b0; 
+    //Right LVDS hi byte RX enabled
+    assign lvdsR_TXhi = 1'b0;  
+   
+    assign ext_mod0 = 4'h0;
+    assign ext_mod9 = 4'h0;
+    
+end
+endgenerate
+
+/******************************************************************************/
+// FPGA Comm 
+/******************************************************************************/
+
+wire [31:0] comm_data_in;
+wire [31:0] comm_data_out;
+wire [5:0]  comm_addr;
+wire [15:0] paging_addr;
+wire comm_write;
+wire comm_read;
+
+sfpgaif fpga_comm_if
+(
+	.rst(rst),
+	.clk(clk),
+	
+	.data_in(comm_data_in),
+	.data_out(comm_data_out),
+	.addr(comm_addr),
+	.write(comm_write),
+	.read(comm_read),
+	
+	.fi_addr(fi_addr),                           
+	.fi_data(fi_data),
+	.fi_read(fi_read),
+	.fi_write(fi_write)
+);
+
+/******************************************************************************/
+// Registers Declarations
+/******************************************************************************/
+
+// Page 0 ---------------------------------------------------------------------
+
+// Reset Register
+wire [31:0] resetReg;
+localparam RESET_INDEX                   = 1;
+assign resetReg                          = oReg[RESET_INDEX];
+
+// Control Register
+localparam CONTROL_INDEX                 = 2;
+wire   vmeFragmentGenEn                  = oReg[CONTROL_INDEX][0];
+assign testEn                            = oReg[CONTROL_INDEX][1];
+assign testSel                           = oReg[CONTROL_INDEX][2];
+assign syncSel                           = oReg[CONTROL_INDEX][3];
+
+// Status Register
+localparam STATUS_INDEX                  = 3;
+assign iReg[STATUS_INDEX]                = {30'd0, busyOut, vmeEmptyFlag};
+
+// Data Fragment Register
+localparam FRAGMENT_INDEX                = 4;
+assign iReg[FRAGMENT_INDEX]              = vmeData;
+assign vmeReadEnable                     = pRead[FRAGMENT_INDEX];
+
+// L1A Latency Register
+localparam L1A_LATENCY_INDEX             = 5;
+assign l1aLatency                        = oReg[L1A_LATENCY_INDEX][7:0];
+
+// Source Identifier Register
+localparam SRC_IDENTIFIER_INDEX          = 6;
+assign sourceIdentifier                  = oReg[SRC_IDENTIFIER_INDEX];
+
+// Run Number Register
+localparam RUN_NUMBER_INDEX              = 7;
+assign runNumber                         = oReg[RUN_NUMBER_INDEX];
+
+// HOLA Control Register
+localparam HOLA_CONTROL_INDEX            = 8;
+wire   vmeRstLane0                       = oReg[HOLA_CONTROL_INDEX][0];
+assign vmeHolaReset                      = oReg[HOLA_CONTROL_INDEX][1];
+wire   vmeUTEST_N                        = ~oReg[HOLA_CONTROL_INDEX][2];
+
+// HOLA Status Register
+localparam HOLA_STATUS_INDEX             = 9;
+assign iReg[HOLA_STATUS_INDEX]           = {26'd0, PLL_LOCK_DET[0], ~LDERRLED_N, ~TESTLED_N, ~FLOWCTLLED_N, ~ACTIVITYLED_N, ~LUPLED_N};
+
+// Board ID Register
+localparam BOARD_ID_INDEX                = 10;
+assign iReg[BOARD_ID_INDEX]              = BOARD_ID;
+
+// Firmware Version Register
+localparam FIRMWARE_VERSION_INDEX        = 11;
+assign iReg[FIRMWARE_VERSION_INDEX]      = FIRMWARE_VERSION;
+
+// G-Link Control Register
+localparam GLINK_CONTROL_INDEX           = 12;
+wire   vmeRstLane1                       = oReg[GLINK_CONTROL_INDEX][0];
+wire   vmeRstLane2                       = oReg[GLINK_CONTROL_INDEX][1];
+wire   vmeRstLane3                       = oReg[GLINK_CONTROL_INDEX][2];
+wire   vmeCtrWordLane1                   = oReg[GLINK_CONTROL_INDEX][3];
+wire   vmeCtrWordLane2                   = oReg[GLINK_CONTROL_INDEX][4];
+wire   vmeCtrWordLane3                   = oReg[GLINK_CONTROL_INDEX][5];
+wire   vmeDataWordLane1                  = oReg[GLINK_CONTROL_INDEX][6];
+wire   vmeDataWordLane2                  = oReg[GLINK_CONTROL_INDEX][7];
+wire   vmeDataWordLane3                  = oReg[GLINK_CONTROL_INDEX][8];
+wire   vmeGlinkSel1                      = oReg[GLINK_CONTROL_INDEX][9];
+wire   vmeGlinkSel2                      = oReg[GLINK_CONTROL_INDEX][10];
+wire   vmeGlinkSel3                      = oReg[GLINK_CONTROL_INDEX][11];
+wire   vmeGlinkPattern1                  = oReg[GLINK_CONTROL_INDEX][12];
+wire   vmeGlinkPattern2                  = oReg[GLINK_CONTROL_INDEX][13];
+wire   vmeGlinkPattern3                  = oReg[GLINK_CONTROL_INDEX][14];
+wire   vmeGlinkCounterRst                = oReg[GLINK_CONTROL_INDEX][15];
+wire   vmeGlinkCounterEn                 = oReg[GLINK_CONTROL_INDEX][16];
+
+// G-Link Pattern 0 Register
+localparam GLINK_PATTERN0_INDEX          = 13;
+wire [15:0] vmePatternLane1              = oReg[GLINK_PATTERN0_INDEX][15:0];
+wire [15:0] vmePatternLane2              = oReg[GLINK_PATTERN0_INDEX][31:16];
+
+// G-Link Pattern 1 Register
+localparam GLINK_PATTERN1_INDEX          = 14;
+wire [15:0] vmePatternLane3              = oReg[GLINK_PATTERN1_INDEX][15:0];
+
+// G-Link Status Register
+localparam GLINK_STATUS_INDEX            = 15;
+assign iReg[GLINK_STATUS_INDEX]          = {28'd0, LANES123_SYNC_DONE, PLL_LOCK_DET[3], PLL_LOCK_DET[2], PLL_LOCK_DET[1]};
+
+// Clock Status Register
+localparam CLOCK_STATUS_INDEX            = 16;
+assign iReg[CLOCK_STATUS_INDEX]          = {29'd0, LANES123_FBDCM_LOCKED, LANE0_FBPLL_LOCKED, PLL_INPUT_LOCKED};
+
+// Page 1 ---------------------------------------------------------------------
+
+/*
+// ADC Registers
+parameter ADC_REG_START = 10;
+parameter ADC_REG_QTY   = 8;
+parameter ADC_PER_REG   = 4;
+
+
+generate
+    for (i=0; i<ADC_REG_QTY; i=i+1) begin : adc_regs
+        //Connecting the 'bc_data' bus to the registers's buses
+        assign iReg[i+ADC_REG_START] = 
+            bc_data[(i*REGS_DATA_WIDTH+REGS_DATA_WIDTH-1):(i*REGS_DATA_WIDTH)];
+        //Connecting the registers's read strobes to the 'bc_read' port
+        assign bc_read[i*ADC_PER_REG+ADC_PER_REG-1:i*ADC_PER_REG] = 
+            {pRead[i+ADC_REG_START], pRead[i+ADC_REG_START], 
+             pRead[i+ADC_REG_START], pRead[i+ADC_REG_START]};
+    end
+endgenerate
+*/
+                
+/******************************************************************************/
+// Registers Component 
+/******************************************************************************/
+
+// Paging Scheme
+parameter PAGE_REG_INDEX = 0;
+
+assign paging_addr = {oReg[PAGE_REG_INDEX][9:0], comm_addr}; 
+    
+cRegs registers
+(
+	.rst(rst),
+	.clk(clk),
+	
+	.addr(paging_addr),
+	.read(comm_read),
+	.write(comm_write),
+	.iData(comm_data_out),
+	.oData(comm_data_in),
+    
+    //WHAT MATTERS HIPPIE!
+	.iReg(iReg_temp),
+	.oReg(oReg_temp),
+	.pWrite(pWrite),
+	.pRead(pRead)
+);
+
+
+/******************************************************************************/
+// Reset Generator 
+/******************************************************************************/
+
+wire vmeReset;
+
+resetGen resetGen_i
+(
+    .clk(clk),
+    .resetRequestWord(resetReg),
+    .resetOut(vmeReset)
+);
+    
+/******************************************************************************/
+// ChipScope 
+/******************************************************************************/
+
+// G-Link data counter     
+reg [15:0] data_counter = 0;
+wire       glink_sel1;
+wire       glink_sel2;
+wire       glink_sel3;
+wire       glink_pattern1;
+wire       glink_pattern2;
+wire       glink_pattern3;
+wire       reset_counter;
+wire       enable_counter;
+
+ always @ (posedge clk)
+	if      (reset_counter)  data_counter <= 16'd0;
+	else if (enable_counter) data_counter <= data_counter + 1; 
+	
+wire            tied_to_ground;
+wire    [255:0] tied_to_ground_vec;
+
+generate
+if (USE_CHIPSCOPE==1) 
+begin : chipscope
+    
+    // ChipScope VIO
+    chipscope_vio chipscope_vio_0
+    (
+     .CLK                               (clk),
+	  .CONTROL                           (vio_control),
+	  .ASYNC_IN                          (vio_async_in),
+     .ASYNC_OUT                         (vio_async_out),
+	  .SYNC_IN                           (vio_sync_in),
+	  .SYNC_OUT                          (vio_sync_out)
+    );
+    
+    // ICON
+    chipscope_icon chipscope_icon_0
+    (
+      .CONTROL0                          (vio_control),
+      .CONTROL1                          (ila_control_0),
+      .CONTROL2                          (ila_control_1),
+      .CONTROL3                          (ila_control_2)
+    );
+
+    //FIR weights
+    // Each 'weights' array holds seven weight values (10-bit weights).
+    // We should have 32 'weights' array, one for each channel, but at this time
+    // we have only one due to the ChipScope test.
+    wire [69:0] weights;
+
+    for (i=0; i<32; i=i+1) begin : w_weight
+        assign weights_m[(i*70+70-1):(i*70)] = weights;		
+    end
+
+   // VIO Asynchronous Outputs
+    
+	//Resets are controlled via Chipscope or VME
+
+   assign  rst                          =  vio_async_out[0] | vmeReset;
+	assign  RESET_LANE[0]                =  vio_async_out[1] | vmeRstLane0;  
+	assign  RESET_LANE[1]                =  vio_async_out[2] | vmeRstLane1;
+	assign  RESET_LANE[2]                =  vio_async_out[3];              	// Signal 'vmeReset' CANNOT reset lane 2 
+	assign  RESET_LANE[3]                =  vio_async_out[4] | vmeRstLane3; 
+ 
+   // VIO Asynchronous Inputs
+	
+	assign  vio_async_in[0]              =  RESET_DONE[0];
+	assign  vio_async_in[1]              =  LANES123_SYNC_DONE;
+	assign  vio_async_in[2]              =  vmeReset;
+//	assign  vio_async_in[3]              =  RESET_DONE[3];
+	assign  vio_async_in[4]              =  PLL_LOCK_DET[0];
+	assign  vio_async_in[5]              =  PLL_LOCK_DET[1];
+	assign  vio_async_in[6]              =  PLL_LOCK_DET[2];
+	assign  vio_async_in[7]              =  PLL_LOCK_DET[3];		
+    
+   // VIO Synchronous Outputs 
+   assign  weights           =  vio_sync_out[69:0];
+   assign  lt6               =  vio_sync_out[88:70];
+	assign  ht6               =  vio_sync_out[107:89];
+	assign  lt56              =  vio_sync_out[126:108];
+	assign  ht56              =  vio_sync_out[145:127];
+	assign  lane1             =  glink_sel1 ? (glink_pattern1 ? data_counter : vio_sync_out[161:146] | vmePatternLane1) : sl1;
+	assign  lane2             =  glink_sel2 ? (glink_pattern2 ? data_counter : vio_sync_out[177:162] | vmePatternLane2) : sl2;
+	assign  lane3             =  glink_sel3 ? (glink_pattern3 ? data_counter : vio_sync_out[193:178] | vmePatternLane3) : sl3;
+	assign  lane1_cntl        =  vio_sync_out[194] | vmeCtrWordLane1;
+	assign  lane1_data        =  vio_sync_out[195] | vmeDataWordLane1;
+	assign  lane2_cntl        =  vio_sync_out[196] | vmeCtrWordLane2;
+	assign  lane2_data        =  vio_sync_out[197] | vmeDataWordLane2;
+	assign  lane3_cntl        =  vio_sync_out[198] | vmeCtrWordLane3;
+	assign  lane3_data        =  vio_sync_out[199] | vmeDataWordLane3;
+   assign  fragmentGenEn     =  vio_sync_out[200] | vmeFragmentGenEn; // Signal fragmentGenEn can be controlled via Chipscope OR VME
+   assign  UTEST_N           =  ~vio_sync_out[201] && vmeUTEST_N;     // Signal UTEST_N from HOLA can be controlled via Chipscope OR VME
+   assign  URESET_N          =  ~vio_sync_out[202] && vmeURESET_N;    // Signal URESET_N from HOLA can be controlled via Chipscope OR VME
+   
+	// Signals glink_sel can be controlled via Chipscope OR VME
+	 
+	assign	glink_sel1       =  vio_sync_out[203] | vmeGlinkSel1;
+	assign	glink_sel2       =  vio_sync_out[206] | vmeGlinkSel2;
+	assign	glink_sel3       =  vio_sync_out[207] | vmeGlinkSel3;
+	assign	glink_pattern1   =  vio_sync_out[208] | vmeGlinkPattern1;
+	assign	glink_pattern2   =  vio_sync_out[209] | vmeGlinkPattern2;
+	assign	glink_pattern3   =  vio_sync_out[210] | vmeGlinkPattern3;
+	assign	reset_counter    =  vio_sync_out[204] | vmeGlinkCounterRst;
+   assign	enable_counter   =  vio_sync_out[205] | vmeGlinkCounterEn;
+	
+	// VIO MUX for triggering channels with thrshold
+	
+	assign   trg_sel          =  vio_sync_out[214:211];
+	
+	// VIO Synchronous Inputs
+
+   assign  vio_sync_in[0]   =  ~TESTLED_N;
+   assign  vio_sync_in[1]   =  ~LDERRLED_N;
+   assign  vio_sync_in[2]   =  ~LUPLED_N;
+   assign  vio_sync_in[3]   =  ~FLOWCTLLED_N;
+   assign  vio_sync_in[4]   =  ~ACTIVITYLED_N;
+   assign  vio_sync_in[5]   =  ~LDOWN_N;
+   assign  vio_sync_in[6]   =  INT_RESETDONE;
+   assign  vio_sync_in[7]   =  LANE0_FBPLL_LOCKED;
+  
+end //end USE_CHIPSCOPE=1 generate section
+else
+begin: no_chipscope
+
+   assign  rst                          =  vmeReset;
+	assign  RESET_LANE[0]                =  vmeRstLane0; // Ligar num Registrador.
+	assign  RESET_LANE[1]                =  vmeRstLane1; // Ligar num Registrador.
+	assign  RESET_LANE[2]                =  vmeRstLane2; // Ligar num Registrador.
+	assign  RESET_LANE[3]                =  vmeRstLane3; // Ligar num Registrador.
+
+    // FIR Weights ------------------------------------------------------------
+    
+    for (i=0; i<2239; i=i+1) begin : w_weights_m
+        assign weights_m[i] = 1'b1;		
+    end
+
+    // Thresholds -------------------------------------------------------------
+    for (i=0; i<18; i=i+1) begin : thresholds
+        assign lt6[i]  = 1'b1;
+        assign ht6[i]  = 1'b1;
+        assign lt56[i] = 1'b1;
+        assign ht56[i] = 1'b1;            
+    end
+    
+    // ------------------------------------------------------------------------
+    
+	assign  lane1                        =  glink_sel1 ? (glink_pattern1 ? data_counter : vmePatternLane1) : sl1; 
+	assign  lane2                        =  glink_sel2 ? (glink_pattern2 ? data_counter : vmePatternLane2) : sl2; 
+	assign  lane3                        =  glink_sel3 ? (glink_pattern3 ? data_counter : vmePatternLane3) : sl3; 
+	assign  lane1_cntl                   =  vmeCtrWordLane1; 
+	assign  lane1_data                   =  vmeDataWordLane1;
+	assign  lane2_cntl                   =  vmeCtrWordLane2;
+	assign  lane2_data                   =  vmeDataWordLane2;
+	assign  lane3_cntl                   =  vmeCtrWordLane3;
+	assign  lane3_data                   =  vmeDataWordLane3;
+   assign  fragmentGenEn                =  vmeFragmentGenEn;
+   assign  UTEST_N                      =  vmeUTEST_N;
+   assign  URESET_N                     =  vmeURESET_N;
+   assign  glink_sel1			 	       =  vmeGlinkSel1;
+	assign  glink_sel2				       =  vmeGlinkSel2;
+	assign  glink_sel3				       =  vmeGlinkSel3;
+	assign  glink_pattern1               =  vmeGlinkPattern1;
+	assign  glink_pattern2               =  vmeGlinkPattern2;
+	assign  glink_pattern3               =  vmeGlinkPattern3;
+   assign  reset_counter				    =  vmeGlinkCounterRst;
+   assign  enable_counter				    =  vmeGlinkCounterEn;
+   assign  trg_sel                      =  4'b1111;
+end
+endgenerate 
+
+endmodule 

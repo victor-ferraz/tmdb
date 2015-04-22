@@ -1,0 +1,22 @@
+# Output products list for <vfifo>
+fifo_generator_ug175.pdf
+fifo_generator_v8_3_readme.txt
+vfifo.asy
+vfifo.gise
+vfifo.ngc
+vfifo.v
+vfifo.veo
+vfifo.xco
+vfifo.xise
+vfifo_flist.txt
+vfifo_ste\example_design\vfifo_top.ucf
+vfifo_ste\example_design\vfifo_top.vhd
+vfifo_ste\example_design\vfifo_top.xdc
+vfifo_ste\implement\implement.bat
+vfifo_ste\implement\implement.sh
+vfifo_ste\implement\planAhead_rdn.bat
+vfifo_ste\implement\planAhead_rdn.sh
+vfifo_ste\implement\planAhead_rdn.tcl
+vfifo_ste\implement\xst.prj
+vfifo_ste\implement\xst.scr
+vfifo_xmdf.tcl

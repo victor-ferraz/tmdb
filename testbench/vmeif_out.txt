@@ -1,0 +1,95 @@
+time: 1212500 ps VME FPGA Reset
+time: 1343500 ps CORE FPGA Reset
+time: 2618500 ps Testing VME FPGA
+time: 2937500 ps  read data: 00000007  on address: 09000000 ok 
+time: 3112500 ps  read data: 00000007  on address: 09000001 ok 
+time: 3287500 ps  read data: 00000007  on address: 09000002 ok 
+time: 3462500 ps  read data: 00000007  on address: 09000003 ok 
+time: 3812500 ps  read data: 00000008  on address: 09000004 ok 
+time: 3987500 ps  read data: 00000008  on address: 09000005 ok 
+time: 4162500 ps  read data: 00000008  on address: 09000006 ok 
+time: 4337500 ps  read data: 00000008  on address: 09000007 ok 
+time: 4687500 ps  read data: 00000009  on address: 090003FC ok 
+time: 4862500 ps  read data: 00000009  on address: 090003FD ok 
+time: 5037500 ps  read data: 00000009  on address: 090003FE ok 
+time: 5212500 ps  read data: 00000009  on address: 090003FF ok 
+time: 5243500 ps Enabling the Fragment Builder
+time: 6368500 ps Reseting HOLA
+time: 9743500 ps Reading Data Fragment
+time: 10887500 ps  read data: 00000000  on address: 09000404 ok 
+time: 12062500 ps  read data: 00000000  on address: 09000404 ok 
+time: 13237500 ps  read data: EE1234EE  on address: 09000408 ok 
+time: 14412500 ps  read data: 00000009  on address: 09000408 ok 
+time: 15587500 ps  read data: 04010000  on address: 09000408 ok 
+time: 16762500 ps  read data: 00000001  on address: 09000408 ok 
+time: 17937500 ps  read data: 00000002  on address: 09000408 ok 
+time: 19112500 ps  read data: 00000000  on address: 09000408 ok 
+time: 20287500 ps  read data: 00000000  on address: 09000408 ok 
+time: 21462500 ps  read data: 00000000  on address: 09000408 ok 
+time: 22637500 ps  read data: 00000000  on address: 09000408 ok 
+time: 23812500 ps  read data: FF1234FF  on address: 09000408 ok 
+time: 24987500 ps  read data: 0000003B  on address: 09000408 ok 
+time: 26162500 ps  read data: 00000000  on address: 09000408 ok 
+time: 27337500 ps  read data: 31211101  on address: 09000408 ok 
+time: 28512500 ps  read data: 71615141  on address: 09000408 ok 
+time: 29687500 ps  read data: B1A19181  on address: 09000408 ok 
+time: 30862500 ps  read data: F1E1D1C1  on address: 09000408 ok 
+time: 32037500 ps  read data: 13121110  on address: 09000408 ok 
+time: 33212500 ps  read data: 17161514  on address: 09000408 ok 
+time: 34387500 ps  read data: 1B1A1918  on address: 09000408 ok 
+time: 35562500 ps  read data: 1F1E1D1C  on address: 09000408 ok 
+time: 36737500 ps  read data: 32221202  on address: 09000408 ok 
+time: 37912500 ps  read data: 72625242  on address: 09000408 ok 
+time: 39087500 ps  read data: B2A29282  on address: 09000408 ok 
+time: 40262500 ps  read data: F2E2D2C2  on address: 09000408 ok 
+time: 41437500 ps  read data: 23222120  on address: 09000408 ok 
+time: 42612500 ps  read data: 27262524  on address: 09000408 ok 
+time: 43787500 ps  read data: 2B2A2928  on address: 09000408 ok 
+time: 44962500 ps  read data: 2F2E2D2C  on address: 09000408 ok 
+time: 46137500 ps  read data: 33231303  on address: 09000408 ok 
+time: 47312500 ps  read data: 73635343  on address: 09000408 ok 
+time: 48487500 ps  read data: B3A39383  on address: 09000408 ok 
+time: 49662500 ps  read data: F3E3D3C3  on address: 09000408 ok 
+time: 50837500 ps  read data: 33323130  on address: 09000408 ok 
+time: 52012500 ps  read data: 37363534  on address: 09000408 ok 
+time: 53187500 ps  read data: 3B3A3938  on address: 09000408 ok 
+time: 54362500 ps  read data: 3F3E3D3C  on address: 09000408 ok 
+time: 55537500 ps  read data: 34241404  on address: 09000408 ok 
+time: 56712500 ps  read data: 74645444  on address: 09000408 ok 
+time: 57887500 ps  read data: B4A49484  on address: 09000408 ok 
+time: 59062500 ps  read data: F4E4D4C4  on address: 09000408 ok 
+time: 60237500 ps  read data: 43424140  on address: 09000408 ok 
+time: 61412500 ps  read data: 47464544  on address: 09000408 ok 
+time: 62587500 ps  read data: 4B4A4948  on address: 09000408 ok 
+time: 63762500 ps  read data: 4F4E4D4C  on address: 09000408 ok 
+time: 64937500 ps  read data: 35251505  on address: 09000408 ok 
+time: 66112500 ps  read data: 75655545  on address: 09000408 ok 
+time: 67287500 ps  read data: B5A59585  on address: 09000408 ok 
+time: 68462500 ps  read data: F5E5D5C5  on address: 09000408 ok 
+time: 69637500 ps  read data: 53525150  on address: 09000408 ok 
+time: 70812500 ps  read data: 57565554  on address: 09000408 ok 
+time: 71987500 ps  read data: 5B5A5958  on address: 09000408 ok 
+time: 73162500 ps  read data: 5F5E5D5C  on address: 09000408 ok 
+time: 74337500 ps  read data: 36261606  on address: 09000408 ok 
+time: 75512500 ps  read data: 76665646  on address: 09000408 ok 
+time: 76687500 ps  read data: B6A69686  on address: 09000408 ok 
+time: 77862500 ps  read data: F6E6D6C6  on address: 09000408 ok 
+time: 79037500 ps  read data: 63626160  on address: 09000408 ok 
+time: 80212500 ps  read data: 67666564  on address: 09000408 ok 
+time: 81387500 ps  read data: 6B6A6968  on address: 09000408 ok 
+time: 82562500 ps  read data: 6F6E6D6C  on address: 09000408 ok 
+time: 83737500 ps  read data: 37271707  on address: 09000408 ok 
+time: 84912500 ps  read data: 77675747  on address: 09000408 ok 
+time: 86087500 ps  read data: B7A79787  on address: 09000408 ok 
+time: 87262500 ps  read data: F7E7D7C7  on address: 09000408 ok 
+time: 88437500 ps  read data: 73727170  on address: 09000408 ok 
+time: 89612500 ps  read data: 77767574  on address: 09000408 ok 
+time: 90787500 ps  read data: 7B7A7978  on address: 09000408 ok 
+time: 91962500 ps  read data: 7F7E7D7C  on address: 09000408 ok 
+time: 93137500 ps  read data: 00000000  on address: 09000408 ok 
+time: 94312500 ps  read data: 0000003B  on address: 09000408 ok 
+time: 95487500 ps  read data: 00000000  on address: 09000408 ok 
+time: 95518500 ps Reading Data Fragment
+time: 96662500 ps  read data: 00000002  on address: 09000404 expected: 00000000  WARNING
+time: 97837500 ps  read data: 00000002  on address: 09000404 expected: 00000000  WARNING
+time: 99012500 ps  read data: EE1234EE  on address: 09000408 ok 

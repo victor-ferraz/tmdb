@@ -1,0 +1,1723 @@
+Release 14.7 - xst P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.19 secs
+ 
+--> Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.19 secs
+ 
+--> 
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "tmdb_core.prj"
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "tmdb_core"
+Output Format                      : NGC
+Target Device                      : xc6slx150t-3-fgg676
+
+---- Source Options
+Top Module Name                    : tmdb_core
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Shift Register Extraction          : YES
+ROM Style                          : Auto
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Shift Register Minimum Size        : 2
+Use DSP Block                      : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+LUT Combining                      : Auto
+Reduce Control Sets                : Auto
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Auto
+Use Synchronous Set                : Auto
+Use Synchronous Reset              : Auto
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Power Reduction                    : NO
+Keep Hierarchy                     : Soft
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+DSP48 Utilization Ratio            : 100
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Analyzing Verilog file "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\EventBuilder\fir.v" into library work
+Parsing module <fir>.
+Parsing verilog file "../array_conversion.v" included at line 20.
+Analyzing Verilog file "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\ipcore_dir\clk_pll.v" into library work
+Parsing module <clk_pll>.
+Analyzing Verilog file "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\ipcore_dir\chipscope_ila.v" into library work
+Parsing module <chipscope_ila>.
+Analyzing Verilog file "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\EventBuilder\evt_build.v" into library work
+Parsing module <evt_build>.
+Analyzing Verilog file "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\EventBuilder\detect.v" into library work
+Parsing module <detect>.
+Analyzing Verilog file "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\EventBuilder\cell_ene.v" into library work
+Parsing module <cell_ene>.
+Analyzing Verilog file "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\sfpgaif\vme_int.v" into library work
+Parsing module <vme_int>.
+Analyzing Verilog file "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\ipcore_dir\chipscope_vio.v" into library work
+Parsing module <chipscope_vio>.
+Analyzing Verilog file "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\ipcore_dir\chipscope_icon.v" into library work
+Parsing module <chipscope_icon>.
+Analyzing Verilog file "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\EventBuilder\main_proc.v" into library work
+Parsing module <main_proc>.
+Parsing verilog file "../array_conversion.v" included at line 76.
+Analyzing Verilog file "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\Clocking\clock.v" into library work
+Parsing module <clock>.
+Analyzing Verilog file "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\ADCReadout\adc_buff.v" into library work
+Parsing module <adc_buff>.
+Parsing verilog file "../array_conversion.v" included at line 28.
+INFO:HDLCompiler:693 - "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\ADCReadout\adc_buff.v" Line 37. parameter declaration becomes local in adc_buff with formal parameter declaration list
+Analyzing Verilog file "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\tmdb_core.v" into library work
+Parsing module <tmdb_core>.
+Parsing verilog file "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\/array_conversion.v" included at line 37.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating module <tmdb_core>.
+
+Elaborating module <clock>.
+
+Elaborating module <clk_pll>.
+
+Elaborating module <IBUFG>.
+
+Elaborating module <DCM_SP(CLKDV_DIVIDE=2.0,CLKFX_DIVIDE=1,CLKFX_MULTIPLY=4,CLKIN_DIVIDE_BY_2="FALSE",CLKIN_PERIOD=25.0,CLKOUT_PHASE_SHIFT="NONE",CLK_FEEDBACK="1X",DESKEW_ADJUST="SYSTEM_SYNCHRONOUS",PHASE_SHIFT=0,STARTUP_WAIT="FALSE")>.
+WARNING:HDLCompiler:1127 - "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\ipcore_dir\clk_pll.v" Line 135: Assignment to status_int ignored, since the identifier is never used
+
+Elaborating module <BUFG>.
+
+Elaborating module <ODDR2>.
+
+Elaborating module <adc_buff(USE_CHIPSCOPE=0)>.
+WARNING:HDLCompiler:413 - "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\tmdb_core.v" Line 190: Result of 17-bit expression is truncated to fit in 16-bit target.
+
+Elaborating module <vme_int>.
+
+Elaborating module <main_proc(USE_CHIPSCOPE=0)>.
+
+Elaborating module <cell_ene>.
+
+Elaborating module <fir>.
+
+Elaborating module <detect>.
+
+Elaborating module <evt_build>.
+WARNING:HDLCompiler:1127 - "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\tmdb_core.v" Line 348: Assignment to sl2 ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\tmdb_core.v" Line 349: Assignment to sl3 ignored, since the identifier is never used
+WARNING:HDLCompiler:634 - "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\tmdb_core.v" Line 44: Net <tied_to_ground> does not have a driver.
+WARNING:HDLCompiler:634 - "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\tmdb_core.v" Line 254: Net <weights[69]> does not have a driver.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <tmdb_core>.
+    Related source file is "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\tmdb_core.v".
+        USE_CHIPSCOPE = 0
+WARNING:Xst:647 - Input <clk_in_pll> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+INFO:Xst:3210 - "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\tmdb_core.v" line 268: Output port <sl2> of the instance <event_builder> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\tmdb_core.v" line 268: Output port <sl3> of the instance <event_builder> is unconnected or connected to loadless signal.
+WARNING:Xst:653 - Signal <weights> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <tied_to_ground> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+    Found 16-bit register for signal <lvdsL_conn>.
+    Found 16-bit adder for signal <cntr[15]_GND_1_o_mux_34_OUT> created at line 190.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  16 D-type flip-flop(s).
+Unit <tmdb_core> synthesized.
+
+Synthesizing Unit <clock>.
+    Related source file is "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\Clocking\clock.v".
+WARNING:Xst:647 - Input <clk_in<5:1>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+INFO:Xst:3210 - "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\Clocking\clock.v" line 41: Output port <LOCKED> of the instance <pll_i[0].pll_inst> is unconnected or connected to loadless signal.
+    Summary:
+	no macro.
+Unit <clock> synthesized.
+
+Synthesizing Unit <clk_pll>.
+    Related source file is "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\ipcore_dir\clk_pll.v".
+    Summary:
+	no macro.
+Unit <clk_pll> synthesized.
+
+Synthesizing Unit <adc_buff>.
+    Related source file is "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\ADCReadout\adc_buff.v".
+        BUFF_SIZE = 3'b111
+        USE_CHIPSCOPE = 0
+WARNING:Xst:2563 - Inout <ila_control> is never assigned. Tied to value Z.
+WARNING:Xst:3035 - Index value(s) does not match array range for signal <buff>, simulation mismatch.
+    Found 7x256-bit dual-port RAM <Mram_buff> for signal <buff>.
+    Found 2-bit register for signal <state>.
+    Found 3-bit register for signal <buff_cnt>.
+    Found 1-bit register for signal <buf_wr>.
+    Found 3-bit register for signal <buf_ad<2:0>>.
+    Found 1-bit register for signal <bf<0><7>>.
+    Found 1-bit register for signal <bf<0><6>>.
+    Found 1-bit register for signal <bf<0><5>>.
+    Found 1-bit register for signal <bf<0><4>>.
+    Found 1-bit register for signal <bf<0><3>>.
+    Found 1-bit register for signal <bf<0><2>>.
+    Found 1-bit register for signal <bf<0><1>>.
+    Found 1-bit register for signal <bf<0><0>>.
+    Found 1-bit register for signal <bf<1><7>>.
+    Found 1-bit register for signal <bf<1><6>>.
+    Found 1-bit register for signal <bf<1><5>>.
+    Found 1-bit register for signal <bf<1><4>>.
+    Found 1-bit register for signal <bf<1><3>>.
+    Found 1-bit register for signal <bf<1><2>>.
+    Found 1-bit register for signal <bf<1><1>>.
+    Found 1-bit register for signal <bf<1><0>>.
+    Found 1-bit register for signal <bf<2><7>>.
+    Found 1-bit register for signal <bf<2><6>>.
+    Found 1-bit register for signal <bf<2><5>>.
+    Found 1-bit register for signal <bf<2><4>>.
+    Found 1-bit register for signal <bf<2><3>>.
+    Found 1-bit register for signal <bf<2><2>>.
+    Found 1-bit register for signal <bf<2><1>>.
+    Found 1-bit register for signal <bf<2><0>>.
+    Found 1-bit register for signal <bf<3><7>>.
+    Found 1-bit register for signal <bf<3><6>>.
+    Found 1-bit register for signal <bf<3><5>>.
+    Found 1-bit register for signal <bf<3><4>>.
+    Found 1-bit register for signal <bf<3><3>>.
+    Found 1-bit register for signal <bf<3><2>>.
+    Found 1-bit register for signal <bf<3><1>>.
+    Found 1-bit register for signal <bf<3><0>>.
+    Found 1-bit register for signal <bf<4><7>>.
+    Found 1-bit register for signal <bf<4><6>>.
+    Found 1-bit register for signal <bf<4><5>>.
+    Found 1-bit register for signal <bf<4><4>>.
+    Found 1-bit register for signal <bf<4><3>>.
+    Found 1-bit register for signal <bf<4><2>>.
+    Found 1-bit register for signal <bf<4><1>>.
+    Found 1-bit register for signal <bf<4><0>>.
+    Found 1-bit register for signal <bf<5><7>>.
+    Found 1-bit register for signal <bf<5><6>>.
+    Found 1-bit register for signal <bf<5><5>>.
+    Found 1-bit register for signal <bf<5><4>>.
+    Found 1-bit register for signal <bf<5><3>>.
+    Found 1-bit register for signal <bf<5><2>>.
+    Found 1-bit register for signal <bf<5><1>>.
+    Found 1-bit register for signal <bf<5><0>>.
+    Found 1-bit register for signal <bf<6><7>>.
+    Found 1-bit register for signal <bf<6><6>>.
+    Found 1-bit register for signal <bf<6><5>>.
+    Found 1-bit register for signal <bf<6><4>>.
+    Found 1-bit register for signal <bf<6><3>>.
+    Found 1-bit register for signal <bf<6><2>>.
+    Found 1-bit register for signal <bf<6><1>>.
+    Found 1-bit register for signal <bf<6><0>>.
+    Found 1-bit register for signal <bf<7><7>>.
+    Found 1-bit register for signal <bf<7><6>>.
+    Found 1-bit register for signal <bf<7><5>>.
+    Found 1-bit register for signal <bf<7><4>>.
+    Found 1-bit register for signal <bf<7><3>>.
+    Found 1-bit register for signal <bf<7><2>>.
+    Found 1-bit register for signal <bf<7><1>>.
+    Found 1-bit register for signal <bf<7><0>>.
+    Found 1-bit register for signal <bf<8><7>>.
+    Found 1-bit register for signal <bf<8><6>>.
+    Found 1-bit register for signal <bf<8><5>>.
+    Found 1-bit register for signal <bf<8><4>>.
+    Found 1-bit register for signal <bf<8><3>>.
+    Found 1-bit register for signal <bf<8><2>>.
+    Found 1-bit register for signal <bf<8><1>>.
+    Found 1-bit register for signal <bf<8><0>>.
+    Found 1-bit register for signal <bf<9><7>>.
+    Found 1-bit register for signal <bf<9><6>>.
+    Found 1-bit register for signal <bf<9><5>>.
+    Found 1-bit register for signal <bf<9><4>>.
+    Found 1-bit register for signal <bf<9><3>>.
+    Found 1-bit register for signal <bf<9><2>>.
+    Found 1-bit register for signal <bf<9><1>>.
+    Found 1-bit register for signal <bf<9><0>>.
+    Found 1-bit register for signal <bf<10><7>>.
+    Found 1-bit register for signal <bf<10><6>>.
+    Found 1-bit register for signal <bf<10><5>>.
+    Found 1-bit register for signal <bf<10><4>>.
+    Found 1-bit register for signal <bf<10><3>>.
+    Found 1-bit register for signal <bf<10><2>>.
+    Found 1-bit register for signal <bf<10><1>>.
+    Found 1-bit register for signal <bf<10><0>>.
+    Found 1-bit register for signal <bf<11><7>>.
+    Found 1-bit register for signal <bf<11><6>>.
+    Found 1-bit register for signal <bf<11><5>>.
+    Found 1-bit register for signal <bf<11><4>>.
+    Found 1-bit register for signal <bf<11><3>>.
+    Found 1-bit register for signal <bf<11><2>>.
+    Found 1-bit register for signal <bf<11><1>>.
+    Found 1-bit register for signal <bf<11><0>>.
+    Found 1-bit register for signal <bf<12><7>>.
+    Found 1-bit register for signal <bf<12><6>>.
+    Found 1-bit register for signal <bf<12><5>>.
+    Found 1-bit register for signal <bf<12><4>>.
+    Found 1-bit register for signal <bf<12><3>>.
+    Found 1-bit register for signal <bf<12><2>>.
+    Found 1-bit register for signal <bf<12><1>>.
+    Found 1-bit register for signal <bf<12><0>>.
+    Found 1-bit register for signal <bf<13><7>>.
+    Found 1-bit register for signal <bf<13><6>>.
+    Found 1-bit register for signal <bf<13><5>>.
+    Found 1-bit register for signal <bf<13><4>>.
+    Found 1-bit register for signal <bf<13><3>>.
+    Found 1-bit register for signal <bf<13><2>>.
+    Found 1-bit register for signal <bf<13><1>>.
+    Found 1-bit register for signal <bf<13><0>>.
+    Found 1-bit register for signal <bf<14><7>>.
+    Found 1-bit register for signal <bf<14><6>>.
+    Found 1-bit register for signal <bf<14><5>>.
+    Found 1-bit register for signal <bf<14><4>>.
+    Found 1-bit register for signal <bf<14><3>>.
+    Found 1-bit register for signal <bf<14><2>>.
+    Found 1-bit register for signal <bf<14><1>>.
+    Found 1-bit register for signal <bf<14><0>>.
+    Found 1-bit register for signal <bf<15><7>>.
+    Found 1-bit register for signal <bf<15><6>>.
+    Found 1-bit register for signal <bf<15><5>>.
+    Found 1-bit register for signal <bf<15><4>>.
+    Found 1-bit register for signal <bf<15><3>>.
+    Found 1-bit register for signal <bf<15><2>>.
+    Found 1-bit register for signal <bf<15><1>>.
+    Found 1-bit register for signal <bf<15><0>>.
+    Found 1-bit register for signal <bf<16><7>>.
+    Found 1-bit register for signal <bf<16><6>>.
+    Found 1-bit register for signal <bf<16><5>>.
+    Found 1-bit register for signal <bf<16><4>>.
+    Found 1-bit register for signal <bf<16><3>>.
+    Found 1-bit register for signal <bf<16><2>>.
+    Found 1-bit register for signal <bf<16><1>>.
+    Found 1-bit register for signal <bf<16><0>>.
+    Found 1-bit register for signal <bf<17><7>>.
+    Found 1-bit register for signal <bf<17><6>>.
+    Found 1-bit register for signal <bf<17><5>>.
+    Found 1-bit register for signal <bf<17><4>>.
+    Found 1-bit register for signal <bf<17><3>>.
+    Found 1-bit register for signal <bf<17><2>>.
+    Found 1-bit register for signal <bf<17><1>>.
+    Found 1-bit register for signal <bf<17><0>>.
+    Found 1-bit register for signal <bf<18><7>>.
+    Found 1-bit register for signal <bf<18><6>>.
+    Found 1-bit register for signal <bf<18><5>>.
+    Found 1-bit register for signal <bf<18><4>>.
+    Found 1-bit register for signal <bf<18><3>>.
+    Found 1-bit register for signal <bf<18><2>>.
+    Found 1-bit register for signal <bf<18><1>>.
+    Found 1-bit register for signal <bf<18><0>>.
+    Found 1-bit register for signal <bf<19><7>>.
+    Found 1-bit register for signal <bf<19><6>>.
+    Found 1-bit register for signal <bf<19><5>>.
+    Found 1-bit register for signal <bf<19><4>>.
+    Found 1-bit register for signal <bf<19><3>>.
+    Found 1-bit register for signal <bf<19><2>>.
+    Found 1-bit register for signal <bf<19><1>>.
+    Found 1-bit register for signal <bf<19><0>>.
+    Found 1-bit register for signal <bf<20><7>>.
+    Found 1-bit register for signal <bf<20><6>>.
+    Found 1-bit register for signal <bf<20><5>>.
+    Found 1-bit register for signal <bf<20><4>>.
+    Found 1-bit register for signal <bf<20><3>>.
+    Found 1-bit register for signal <bf<20><2>>.
+    Found 1-bit register for signal <bf<20><1>>.
+    Found 1-bit register for signal <bf<20><0>>.
+    Found 1-bit register for signal <bf<21><7>>.
+    Found 1-bit register for signal <bf<21><6>>.
+    Found 1-bit register for signal <bf<21><5>>.
+    Found 1-bit register for signal <bf<21><4>>.
+    Found 1-bit register for signal <bf<21><3>>.
+    Found 1-bit register for signal <bf<21><2>>.
+    Found 1-bit register for signal <bf<21><1>>.
+    Found 1-bit register for signal <bf<21><0>>.
+    Found 1-bit register for signal <bf<22><7>>.
+    Found 1-bit register for signal <bf<22><6>>.
+    Found 1-bit register for signal <bf<22><5>>.
+    Found 1-bit register for signal <bf<22><4>>.
+    Found 1-bit register for signal <bf<22><3>>.
+    Found 1-bit register for signal <bf<22><2>>.
+    Found 1-bit register for signal <bf<22><1>>.
+    Found 1-bit register for signal <bf<22><0>>.
+    Found 1-bit register for signal <bf<23><7>>.
+    Found 1-bit register for signal <bf<23><6>>.
+    Found 1-bit register for signal <bf<23><5>>.
+    Found 1-bit register for signal <bf<23><4>>.
+    Found 1-bit register for signal <bf<23><3>>.
+    Found 1-bit register for signal <bf<23><2>>.
+    Found 1-bit register for signal <bf<23><1>>.
+    Found 1-bit register for signal <bf<23><0>>.
+    Found 1-bit register for signal <bf<24><7>>.
+    Found 1-bit register for signal <bf<24><6>>.
+    Found 1-bit register for signal <bf<24><5>>.
+    Found 1-bit register for signal <bf<24><4>>.
+    Found 1-bit register for signal <bf<24><3>>.
+    Found 1-bit register for signal <bf<24><2>>.
+    Found 1-bit register for signal <bf<24><1>>.
+    Found 1-bit register for signal <bf<24><0>>.
+    Found 1-bit register for signal <bf<25><7>>.
+    Found 1-bit register for signal <bf<25><6>>.
+    Found 1-bit register for signal <bf<25><5>>.
+    Found 1-bit register for signal <bf<25><4>>.
+    Found 1-bit register for signal <bf<25><3>>.
+    Found 1-bit register for signal <bf<25><2>>.
+    Found 1-bit register for signal <bf<25><1>>.
+    Found 1-bit register for signal <bf<25><0>>.
+    Found 1-bit register for signal <bf<26><7>>.
+    Found 1-bit register for signal <bf<26><6>>.
+    Found 1-bit register for signal <bf<26><5>>.
+    Found 1-bit register for signal <bf<26><4>>.
+    Found 1-bit register for signal <bf<26><3>>.
+    Found 1-bit register for signal <bf<26><2>>.
+    Found 1-bit register for signal <bf<26><1>>.
+    Found 1-bit register for signal <bf<26><0>>.
+    Found 1-bit register for signal <bf<27><7>>.
+    Found 1-bit register for signal <bf<27><6>>.
+    Found 1-bit register for signal <bf<27><5>>.
+    Found 1-bit register for signal <bf<27><4>>.
+    Found 1-bit register for signal <bf<27><3>>.
+    Found 1-bit register for signal <bf<27><2>>.
+    Found 1-bit register for signal <bf<27><1>>.
+    Found 1-bit register for signal <bf<27><0>>.
+    Found 1-bit register for signal <bf<28><7>>.
+    Found 1-bit register for signal <bf<28><6>>.
+    Found 1-bit register for signal <bf<28><5>>.
+    Found 1-bit register for signal <bf<28><4>>.
+    Found 1-bit register for signal <bf<28><3>>.
+    Found 1-bit register for signal <bf<28><2>>.
+    Found 1-bit register for signal <bf<28><1>>.
+    Found 1-bit register for signal <bf<28><0>>.
+    Found 1-bit register for signal <bf<29><7>>.
+    Found 1-bit register for signal <bf<29><6>>.
+    Found 1-bit register for signal <bf<29><5>>.
+    Found 1-bit register for signal <bf<29><4>>.
+    Found 1-bit register for signal <bf<29><3>>.
+    Found 1-bit register for signal <bf<29><2>>.
+    Found 1-bit register for signal <bf<29><1>>.
+    Found 1-bit register for signal <bf<29><0>>.
+    Found 1-bit register for signal <bf<30><7>>.
+    Found 1-bit register for signal <bf<30><6>>.
+    Found 1-bit register for signal <bf<30><5>>.
+    Found 1-bit register for signal <bf<30><4>>.
+    Found 1-bit register for signal <bf<30><3>>.
+    Found 1-bit register for signal <bf<30><2>>.
+    Found 1-bit register for signal <bf<30><1>>.
+    Found 1-bit register for signal <bf<30><0>>.
+    Found 1-bit register for signal <bf<31><7>>.
+    Found 1-bit register for signal <bf<31><6>>.
+    Found 1-bit register for signal <bf<31><5>>.
+    Found 1-bit register for signal <bf<31><4>>.
+    Found 1-bit register for signal <bf<31><3>>.
+    Found 1-bit register for signal <bf<31><2>>.
+    Found 1-bit register for signal <bf<31><1>>.
+    Found 1-bit register for signal <bf<31><0>>.
+    Found 3-bit register for signal <rd_buf_cnt>.
+    Found 256-bit register for signal <buff_r>.
+    Found finite state machine <FSM_0> for signal <state>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 8                                              |
+    | Inputs             | 3                                              |
+    | Outputs            | 3                                              |
+    | Clock              | clk (rising_edge)                              |
+    | Reset              | rst (positive)                                 |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | 00                                             |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 3-bit adder for signal <buff_cnt[2]_GND_8_o_add_40_OUT> created at line 59.
+    Found 3-bit adder for signal <rd_buf_cnt[2]_GND_8_o_add_118_OUT> created at line 113.
+    Found 8-bit 32-to-1 multiplexer for signal <bc_data> created at line 132.
+    Found 36-bit tristate buffer for signal <ila_control> created at line 25
+    Summary:
+	inferred   1 RAM(s).
+	inferred   2 Adder/Subtractor(s).
+	inferred 522 D-type flip-flop(s).
+	inferred   2 Multiplexer(s).
+	inferred   1 Tristate(s).
+	inferred   1 Finite State Machine(s).
+Unit <adc_buff> synthesized.
+
+Synthesizing Unit <vme_int>.
+    Related source file is "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\sfpgaif\vme_int.v".
+    Found 8-bit register for signal <r_gpa>.
+    Found 8-bit register for signal <r_gpb>.
+    Found 8-bit register for signal <r_acq_ctrl>.
+    Found 5-bit register for signal <adc_chn>.
+    Found 1-bit register for signal <adc_rd>.
+    Found 8-bit 4-to-1 multiplexer for signal <_n0065> created at line 25.
+    Found 1-bit tristate buffer for signal <vme_data<7>> created at line 38
+    Found 1-bit tristate buffer for signal <vme_data<6>> created at line 38
+    Found 1-bit tristate buffer for signal <vme_data<5>> created at line 38
+    Found 1-bit tristate buffer for signal <vme_data<4>> created at line 38
+    Found 1-bit tristate buffer for signal <vme_data<3>> created at line 38
+    Found 1-bit tristate buffer for signal <vme_data<2>> created at line 38
+    Found 1-bit tristate buffer for signal <vme_data<1>> created at line 38
+    Found 1-bit tristate buffer for signal <vme_data<0>> created at line 38
+    Summary:
+	inferred  30 D-type flip-flop(s).
+	inferred   2 Multiplexer(s).
+	inferred   8 Tristate(s).
+Unit <vme_int> synthesized.
+
+Synthesizing Unit <main_proc>.
+    Related source file is "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\EventBuilder\main_proc.v".
+        USE_CHIPSCOPE = 0
+WARNING:Xst:2563 - Inout <ila_control> is never assigned. Tied to value Z.
+    Found 36-bit tristate buffer for signal <ila_control> created at line 73
+    Summary:
+	inferred   1 Tristate(s).
+Unit <main_proc> synthesized.
+
+Synthesizing Unit <cell_ene>.
+    Related source file is "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\EventBuilder\cell_ene.v".
+    Found 19-bit adder for signal <out> created at line 16.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+Unit <cell_ene> synthesized.
+
+Synthesizing Unit <fir>.
+    Related source file is "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\EventBuilder\fir.v".
+    Found 48-bit register for signal <n0031>.
+    Found 18-bit adder for signal <n0049> created at line 49.
+    Found 18-bit adder for signal <n0052> created at line 49.
+    Found 18-bit adder for signal <n0055> created at line 49.
+    Found 18-bit adder for signal <n0058> created at line 49.
+    Found 18-bit adder for signal <n0061> created at line 49.
+    Found 18-bit adder for signal <out> created at line 49.
+    Found 8x10-bit multiplier for signal <n0046> created at line 49.
+    Found 8x10-bit multiplier for signal <n0047> created at line 49.
+    Found 8x10-bit multiplier for signal <n0050> created at line 49.
+    Found 8x10-bit multiplier for signal <n0053> created at line 49.
+    Found 8x10-bit multiplier for signal <n0056> created at line 49.
+    Found 8x10-bit multiplier for signal <n0059> created at line 50.
+    Found 8x10-bit multiplier for signal <n0062> created at line 50.
+    Summary:
+	inferred   7 Multiplier(s).
+	inferred   6 Adder/Subtractor(s).
+	inferred  48 D-type flip-flop(s).
+Unit <fir> synthesized.
+
+Synthesizing Unit <detect>.
+    Related source file is "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\EventBuilder\detect.v".
+        LT = 100
+        HT = 120
+    Found 57-bit register for signal <n0020>.
+    Found 57-bit register for signal <n0019>.
+    Found 19-bit adder for signal <cell5[18]_cell6[18]_add_1_OUT> created at line 36.
+    Found 19-bit comparator greater for signal <mask1[0][18]_mask1[1][18]_LessThan_4_o> created at line 42
+    Found 19-bit comparator greater for signal <mask1[2][18]_mask1[1][18]_LessThan_5_o> created at line 42
+    Found 19-bit comparator greater for signal <mask2[0][18]_mask2[1][18]_LessThan_6_o> created at line 43
+    Found 19-bit comparator greater for signal <mask2[2][18]_mask2[1][18]_LessThan_7_o> created at line 43
+    Found 19-bit comparator greater for signal <GND_22_o_mask1[1][18]_LessThan_8_o> created at line 45
+    Found 19-bit comparator greater for signal <GND_22_o_mask1[1][18]_LessThan_9_o> created at line 46
+    Found 19-bit comparator greater for signal <GND_22_o_mask2[1][18]_LessThan_10_o> created at line 47
+    Found 19-bit comparator greater for signal <GND_22_o_mask2[1][18]_LessThan_11_o> created at line 48
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred 114 D-type flip-flop(s).
+	inferred   8 Comparator(s).
+Unit <detect> synthesized.
+
+Synthesizing Unit <evt_build>.
+    Related source file is "\\cern.ch\dfs\users\r\rgoncalv\Projects\tmdb_core\EventBuilder\evt_build.v".
+    Summary:
+	no macro.
+Unit <evt_build> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 1
+ 7x256-bit dual-port RAM                               : 1
+# Multipliers                                          : 224
+ 10x8-bit multiplier                                   : 224
+# Adders/Subtractors                                   : 219
+ 16-bit adder                                          : 1
+ 18-bit adder                                          : 192
+ 19-bit adder                                          : 24
+ 3-bit adder                                           : 2
+# Registers                                            : 60
+ 1-bit register                                        : 2
+ 16-bit register                                       : 1
+ 256-bit register                                      : 2
+ 3-bit register                                        : 3
+ 48-bit register                                       : 32
+ 5-bit register                                        : 1
+ 57-bit register                                       : 16
+ 8-bit register                                        : 3
+# Comparators                                          : 64
+ 19-bit comparator greater                             : 64
+# Multiplexers                                         : 4
+ 3-bit 2-to-1 multiplexer                              : 1
+ 8-bit 2-to-1 multiplexer                              : 1
+ 8-bit 32-to-1 multiplexer                             : 1
+ 8-bit 4-to-1 multiplexer                              : 1
+# Tristates                                            : 10
+ 1-bit tristate buffer                                 : 8
+ 36-bit tristate buffer                                : 2
+# FSMs                                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+WARNING:Xst:1290 - Hierarchical block <mod2_d5> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod2_d6> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod3_d5> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod3_d6> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod4_d5> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod4_d6> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod5_d5> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod5_d6> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod6_d5> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod6_d6> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod7_d5> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod7_d6> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod2_det> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod3_det> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod4_det> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod5_det> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod6_det> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod7_det> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <eb3> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <eb2> is unconnected in block <event_builder>.
+   It will be removed from the design.
+INFO:Xst:2261 - The FF/Latch <r_gpa_0> in Unit <vme> is equivalent to the following 2 FFs/Latches, which will be removed : <r_gpb_0> <r_acq_ctrl_0> 
+INFO:Xst:2261 - The FF/Latch <r_gpa_1> in Unit <vme> is equivalent to the following 2 FFs/Latches, which will be removed : <r_gpb_1> <r_acq_ctrl_1> 
+INFO:Xst:2261 - The FF/Latch <r_gpa_2> in Unit <vme> is equivalent to the following 2 FFs/Latches, which will be removed : <r_gpb_2> <r_acq_ctrl_2> 
+INFO:Xst:2261 - The FF/Latch <r_gpa_3> in Unit <vme> is equivalent to the following 2 FFs/Latches, which will be removed : <r_gpb_3> <r_acq_ctrl_3> 
+INFO:Xst:2261 - The FF/Latch <r_gpa_4> in Unit <vme> is equivalent to the following 2 FFs/Latches, which will be removed : <r_gpb_4> <r_acq_ctrl_4> 
+INFO:Xst:2261 - The FF/Latch <r_gpa_5> in Unit <vme> is equivalent to the following 2 FFs/Latches, which will be removed : <r_gpb_5> <r_acq_ctrl_5> 
+INFO:Xst:2261 - The FF/Latch <r_gpa_6> in Unit <vme> is equivalent to the following 2 FFs/Latches, which will be removed : <r_gpb_6> <r_acq_ctrl_6> 
+INFO:Xst:2261 - The FF/Latch <r_gpa_7> in Unit <vme> is equivalent to the following 2 FFs/Latches, which will be removed : <r_gpb_7> <r_acq_ctrl_7> 
+
+Synthesizing (advanced) Unit <adc_buff>.
+INFO:Xst:3226 - The RAM <Mram_buff> will be implemented as a BLOCK RAM, absorbing the following register(s): <buff_r>
+    -----------------------------------------------------------------------
+    | ram_type           | Block                               |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 7-word x 256-bit                    |          |
+    |     mode           | read-first                          |          |
+    |     clkA           | connected to signal <clk>           | rise     |
+    |     weA            | connected to signal <buf_wr>        | high     |
+    |     addrA          | connected to signal <buf_ad>        |          |
+    |     diA            | connected to signal
+<(bf<31><7>,bf<31><6>,bf<31><5>,bf<31><4>,bf<31><3>,bf<31><2>,bf<31><1>,bf<31><0>,bf<30><7>,bf<30><6>,bf<30><5>,bf<30><4>,bf<30><3>,bf<30><2>,bf<30><1>,bf<30><0>,bf<29><7>,bf<29><6>,bf<29><5>,bf<29><4>,bf<29><3>,bf<29><2>,bf<29><1>,bf<29><0>,bf<28><7>,bf<28><6>,bf<28><5>,bf<28><4>,bf<28><3>,bf<28><2>,bf<28><1>,bf<28><0>,bf<27><7>,bf<27><6>,bf<27><5>,bf<27><4>,bf<27><3>,bf<27><2>,bf<27><1>,bf<27><0>,bf<26><7>,bf<26><6>,bf<26><5>,bf<26><4>,bf<26><3>,bf<26><2>,bf<26><1>,bf<26><0>,bf<25><7>,bf<25><6>,bf<25><5>,bf<25><4>,bf<25><3>,bf<25><2>,bf<25><1>,bf<25><0>,bf<24><7>,bf<24><6>,bf<24><5>,bf<24><4>,bf<24><3>,bf<24><2>,bf<24><1>,bf<24><0>,bf<23><7>,bf<23><6>,bf<23><5>,bf<23><4>,bf<23><3>,bf<23><2>,bf<23><1>,bf<23><0>,bf<22><7>,bf<22><6>,bf<22><5>,bf<22><4>,bf<22><3>,bf<22><2>,bf<22><1>,bf<22><0>,bf<21><7>,bf<21><6>,bf<21><5>,bf<21><4>,bf<21><3>,bf<21><2>,bf<21><1>,bf<21><0>,bf<20><7>,bf<20><6>,bf<20><5>,bf<20><4>,bf<20><3>,bf<20><2>,bf<20><1>,bf<20><0>,bf<19><7>,bf<19><6>,bf<19><5>,bf<19><4>,bf<19><3>,bf<19><2>,bf
+<19><1>,bf<19><0>,bf<18><7>,bf<18><6>,bf<18><5>,bf<18><4>,bf<18><3>,bf<18><2>,bf<18><1>,bf<18><0>,bf<17><7>,bf<17><6>,bf<17><5>,bf<17><4>,bf<17><3>,bf<17><2>,bf<17><1>,bf<17><0>,bf<16><7>,bf<16><6>,bf<16><5>,bf<16><4>,bf<16><3>,bf<16><2>,bf<16><1>,bf<16><0>,bf<15><7>,bf<15><6>,bf<15><5>,bf<15><4>,bf<15><3>,bf<15><2>,bf<15><1>,bf<15><0>,bf<14><7>,bf<14><6>,bf<14><5>,bf<14><4>,bf<14><3>,bf<14><2>,bf<14><1>,bf<14><0>,bf<13><7>,bf<13><6>,bf<13><5>,bf<13><4>,bf<13><3>,bf<13><2>,bf<13><1>,bf<13><0>,bf<12><7>,bf<12><6>,bf<12><5>,bf<12><4>,bf<12><3>,bf<12><2>,bf<12><1>,bf<12><0>,bf<11><7>,bf<11><6>,bf<11><5>,bf<11><4>,bf<11><3>,bf<11><2>,bf<11><1>,bf<11><0>,bf<10><7>,bf<10><6>,bf<10><5>,bf<10><4>,bf<10><3>,bf<10><2>,bf<10><1>,bf<10><0>,bf<9><7>,bf<9><6>,bf<9><5>,bf<9><4>,bf<9><3>,bf<9><2>,bf<9><1>,bf<9><0>,bf<8><7>,bf<8><6>,bf<8><5>,bf<8><4>,bf<8><3>,bf<8><2>,bf<8><1>,bf<8><0>,bf<7><7>,bf<7><6>,bf<7><5>,bf<7><4>,bf<7><3>,bf<7><2>,bf<7><1>,bf<7><0>,bf<6><7>,bf<6><6>,bf<6><5>,bf<6><4>,bf<6><3>,bf<6><2>,bf<6><1>,bf<6><0
+>,bf<5><7>,bf<5><6>,bf<5><5>,bf<5><4>,bf<5><3>,bf<5><2>,bf<5><1>,bf<5><0>,bf<4><7>,bf<4><6>,bf<4><5>,bf<4><4>,bf<4><3>,bf<4><2>,bf<4><1>,bf<4><0>,bf<3><7>,bf<3><6>,bf<3><5>,bf<3><4>,bf<3><3>,bf<3><2>,bf<3><1>,bf<3><0>,bf<2><7>,bf<2><6>,bf<2><5>,bf<2><4>,bf<2><3>,bf<2><2>,bf<2><1>,bf<2><0>,bf<1><7>,bf<1><6>,bf<1><5>,bf<1><4>,bf<1><3>,bf<1><2>,bf<1><1>,bf<1><0>,bf<0><7>,bf<0><6>,bf<0><5>,bf<0><4>,bf<0><3>,bf<0><2>,bf<0><1>,bf<0><0>)> |          |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 7-word x 256-bit                    |          |
+    |     mode           | read-first                          |          |
+    |     clkB           | connected to signal <clk>           | rise     |
+    |     addrB          | connected to signal <rd_buf_cnt>    |          |
+    |     doB            | connected to signal <buff_r>        |          |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+Unit <adc_buff> synthesized (advanced).
+
+Synthesizing (advanced) Unit <fir>.
+	The following adders/subtractors are grouped into adder tree <Madd_out1> :
+ 	<Madd_n0049> in block <fir>, 	<Madd_n0052> in block <fir>, 	<Madd_n0055> in block <fir>, 	<Madd_n0058> in block <fir>, 	<Madd_n0061> in block <fir>, 	<Madd_out> in block <fir>.
+	Multiplier <Mmult_n0062> in block <fir> and adder/subtractor <ADDER_FOR_MULTADD_Madd5> in block <fir> are combined into a MAC<Maddsub_n0062>.
+	Multiplier <Mmult_n0059> in block <fir> and adder/subtractor <ADDER_FOR_MULTADD_Madd4> in block <fir> are combined into a MAC<Maddsub_n0059>.
+	Multiplier <Mmult_n0056> in block <fir> and adder/subtractor <ADDER_FOR_MULTADD_Madd3> in block <fir> are combined into a MAC<Maddsub_n0056>.
+	Multiplier <Mmult_n0053> in block <fir> and adder/subtractor <ADDER_FOR_MULTADD_Madd2> in block <fir> are combined into a MAC<Maddsub_n0053>.
+	Multiplier <Mmult_n0050> in block <fir> and adder/subtractor <ADDER_FOR_MULTADD_Madd1> in block <fir> are combined into a MAC<Maddsub_n0050>.
+	Multiplier <Mmult_n0047> in block <fir> and adder/subtractor <ADDER_FOR_MULTADD_Madd> in block <fir> are combined into a MAC<Maddsub_n0047>.
+Unit <fir> synthesized (advanced).
+
+Synthesizing (advanced) Unit <tmdb_core>.
+The following registers are absorbed into counter <cntr>: 1 register on signal <cntr>.
+Unit <tmdb_core> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 1
+ 7x256-bit dual-port block RAM                         : 1
+# MACs                                                 : 192
+ 10x8-to-18-bit MAC                                    : 192
+# Multipliers                                          : 32
+ 10x8-bit multiplier                                   : 32
+# Adders/Subtractors                                   : 26
+ 19-bit adder                                          : 24
+ 3-bit adder                                           : 2
+# Counters                                             : 1
+ 16-bit up counter                                     : 1
+# Registers                                            : 2744
+ Flip-Flops                                            : 2744
+# Comparators                                          : 64
+ 19-bit comparator greater                             : 64
+# Multiplexers                                         : 11
+ 1-bit 4-to-1 multiplexer                              : 8
+ 3-bit 2-to-1 multiplexer                              : 1
+ 8-bit 2-to-1 multiplexer                              : 1
+ 8-bit 32-to-1 multiplexer                             : 1
+# FSMs                                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+INFO:Xst:2261 - The FF/Latch <r_gpa_0> in Unit <vme_int> is equivalent to the following 2 FFs/Latches, which will be removed : <r_gpb_0> <r_acq_ctrl_0> 
+INFO:Xst:2261 - The FF/Latch <r_gpa_1> in Unit <vme_int> is equivalent to the following 2 FFs/Latches, which will be removed : <r_gpb_1> <r_acq_ctrl_1> 
+INFO:Xst:2261 - The FF/Latch <r_gpa_2> in Unit <vme_int> is equivalent to the following 2 FFs/Latches, which will be removed : <r_gpb_2> <r_acq_ctrl_2> 
+INFO:Xst:2261 - The FF/Latch <r_gpa_3> in Unit <vme_int> is equivalent to the following 2 FFs/Latches, which will be removed : <r_gpb_3> <r_acq_ctrl_3> 
+INFO:Xst:2261 - The FF/Latch <r_gpa_4> in Unit <vme_int> is equivalent to the following 2 FFs/Latches, which will be removed : <r_gpb_4> <r_acq_ctrl_4> 
+INFO:Xst:2261 - The FF/Latch <r_gpa_5> in Unit <vme_int> is equivalent to the following 2 FFs/Latches, which will be removed : <r_gpb_5> <r_acq_ctrl_5> 
+INFO:Xst:2261 - The FF/Latch <r_gpa_6> in Unit <vme_int> is equivalent to the following 2 FFs/Latches, which will be removed : <r_gpb_6> <r_acq_ctrl_6> 
+INFO:Xst:2261 - The FF/Latch <r_gpa_7> in Unit <vme_int> is equivalent to the following 2 FFs/Latches, which will be removed : <r_gpb_7> <r_acq_ctrl_7> 
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <data_buffering/FSM_0> on signal <state[1:2]> with gray encoding.
+-------------------
+ State | Encoding
+-------------------
+ 00    | 00
+ 01    | 01
+ 10    | 11
+ 11    | 10
+-------------------
+WARNING:Xst:2042 - Unit main_proc: 36 internal tristates are replaced by logic (pull-up yes): ila_control<0>, ila_control<10>, ila_control<11>, ila_control<12>, ila_control<13>, ila_control<14>, ila_control<15>, ila_control<16>, ila_control<17>, ila_control<18>, ila_control<19>, ila_control<1>, ila_control<20>, ila_control<21>, ila_control<22>, ila_control<23>, ila_control<24>, ila_control<25>, ila_control<26>, ila_control<27>, ila_control<28>, ila_control<29>, ila_control<2>, ila_control<30>, ila_control<31>, ila_control<32>, ila_control<33>, ila_control<34>, ila_control<35>, ila_control<3>, ila_control<4>, ila_control<5>, ila_control<6>, ila_control<7>, ila_control<8>, ila_control<9>.
+WARNING:Xst:2042 - Unit adc_buff: 36 internal tristates are replaced by logic (pull-up yes): ila_control<0>, ila_control<10>, ila_control<11>, ila_control<12>, ila_control<13>, ila_control<14>, ila_control<15>, ila_control<16>, ila_control<17>, ila_control<18>, ila_control<19>, ila_control<1>, ila_control<20>, ila_control<21>, ila_control<22>, ila_control<23>, ila_control<24>, ila_control<25>, ila_control<26>, ila_control<27>, ila_control<28>, ila_control<29>, ila_control<2>, ila_control<30>, ila_control<31>, ila_control<32>, ila_control<33>, ila_control<34>, ila_control<35>, ila_control<3>, ila_control<4>, ila_control<5>, ila_control<6>, ila_control<7>, ila_control<8>, ila_control<9>.
+
+Optimizing unit <tmdb_core> ...
+
+Optimizing unit <clk_pll> ...
+
+Optimizing unit <cell_ene> ...
+
+Optimizing unit <evt_build> ...
+
+Optimizing unit <clock> ...
+
+Optimizing unit <adc_buff> ...
+
+Optimizing unit <vme_int> ...
+
+Optimizing unit <main_proc> ...
+
+Optimizing unit <fir> ...
+
+Optimizing unit <detect> ...
+WARNING:Xst:1710 - FF/Latch <mask1_0_8> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_7> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_6> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_5> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_4> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_3> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_2> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_1> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_0> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_18> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_17> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_16> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_15> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_14> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_13> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_12> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_11> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_10> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_9> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_8> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_7> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_6> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_5> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_4> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_3> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_2> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_1> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_0> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_18> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_17> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_16> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_15> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_14> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_13> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_12> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_11> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_10> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_9> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_8> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_7> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_6> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_5> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_4> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_3> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_2> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_1> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask2_0_0> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_18> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_17> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_16> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_15> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_14> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_13> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_12> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_11> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_10> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_9> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_0> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_1> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_2> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_3> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_4> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_5> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_6> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_7> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_8> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_18> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_17> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_16> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_15> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_14> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_13> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_12> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_11> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_10> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <mask1_0_9> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_19> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_20> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_21> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_22> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_23> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_24> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_25> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_26> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_27> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_28> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_29> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_30> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_31> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_32> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_33> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_34> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_35> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_36> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_37> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_37> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_36> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_35> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_34> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_33> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_32> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_31> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_30> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_29> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_28> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_27> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_26> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_25> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_24> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_23> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_22> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_21> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_20> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_19> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_37> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_36> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_35> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_34> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_33> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_32> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_31> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_30> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_29> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_28> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_27> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_26> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_25> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_24> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_23> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_22> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_21> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_20> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_19> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_19> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_20> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_21> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_22> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_23> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_24> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_25> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_26> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_27> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_37> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_36> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_35> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_34> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_33> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_32> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_31> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_30> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_29> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_28> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_56> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_55> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_54> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_53> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_52> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_51> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_50> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_49> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_48> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_47> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_46> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_45> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_44> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_43> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_42> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_41> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_40> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_39> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_38> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_46> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_45> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_44> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_43> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_42> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_41> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_40> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_39> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_38> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_38> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_39> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_40> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_41> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_42> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_43> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_44> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_45> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_46> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_47> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_48> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_49> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_50> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_51> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_52> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_53> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_54> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_55> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_56> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_56> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_55> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_54> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_53> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_52> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_51> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_50> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_49> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_48> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_47> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_46> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_45> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_44> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_43> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_42> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_41> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_40> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_39> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask1_0_38> (without init value) has a constant value of 0 in block <mod1_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_56> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_55> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_54> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_53> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_52> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_51> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_50> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_49> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_48> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <mask2_0_47> (without init value) has a constant value of 0 in block <mod8_det>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1290 - Hierarchical block <mod7_d6> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod7_d5> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod6_d6> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod6_d5> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod5_d6> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod5_d5> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod4_d6> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod4_d5> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod3_d6> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod3_d5> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod2_d6> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod2_d5> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod7_det> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod6_det> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod5_det> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod4_det> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod3_det> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod2_det> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <eb2> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <eb3> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_0> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_8> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_16> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_24> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_32> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_40> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_1> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_9> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_17> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_25> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_33> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_41> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_2> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_10> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_18> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_26> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_34> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_42> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_3> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_11> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_19> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_27> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_35> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_43> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_4> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_12> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_20> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_28> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_36> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_44> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_5> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_13> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_21> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_29> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_37> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_45> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_6> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_14> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_22> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_30> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_38> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_46> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_7> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_15> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_23> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_31> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_39> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_47> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_0> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_8> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_16> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_24> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_32> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_40> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_1> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_9> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_17> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_25> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_33> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_41> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_2> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_10> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_18> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_26> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_34> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_42> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_3> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_11> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_19> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_27> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_35> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_43> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_4> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_12> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_20> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_28> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_36> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_44> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_5> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_13> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_21> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_29> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_37> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_45> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_6> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_14> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_22> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_30> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_38> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_46> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_7> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_15> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_23> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_31> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_39> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_47> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_0> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_8> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_16> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_24> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_32> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_40> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_1> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_9> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_17> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_25> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_33> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_41> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_2> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_10> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_18> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_26> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_34> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_42> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_3> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_11> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_19> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_27> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_35> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_43> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_4> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_12> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_20> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_28> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_36> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_44> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_5> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_13> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_21> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_29> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_37> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_45> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_6> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_14> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_22> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_30> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_38> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_46> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_7> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_15> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_23> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_31> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_39> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_47> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_0> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_8> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_16> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_24> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_32> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_40> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_1> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_9> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_17> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_25> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_33> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_41> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_2> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_10> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_18> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_26> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_34> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_42> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_3> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_11> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_19> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_27> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_35> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_43> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_4> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_12> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_20> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_28> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_36> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_44> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_5> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_13> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_21> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_29> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_37> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_45> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_6> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_14> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_22> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_30> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_38> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_46> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_7> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_15> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_23> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_31> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_39> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_47> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_0> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_8> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_16> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_24> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_32> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_40> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_1> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_9> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_17> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_25> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_33> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_41> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_2> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_10> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_18> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_26> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_34> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_42> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_3> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_11> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_19> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_27> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_35> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_43> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_4> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_12> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_20> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_28> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_36> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_44> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_5> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_13> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_21> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_29> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_37> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_45> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_6> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_14> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_22> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_30> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_38> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_46> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_7> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_15> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_23> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_31> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_39> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_47> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_0> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_8> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_16> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_24> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_32> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_40> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_1> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_9> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_17> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_25> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_33> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_41> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_2> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_10> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_18> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_26> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_34> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_42> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_3> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_11> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_19> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_27> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_35> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_43> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_4> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_12> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_20> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_28> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_36> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_44> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_5> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_13> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_21> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_29> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_37> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_45> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_6> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_14> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_22> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_30> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_38> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_46> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_7> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_15> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_23> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_31> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_39> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_47> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_0> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_8> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_16> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_24> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_32> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_40> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_1> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_9> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_17> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_25> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_33> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_41> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_2> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_10> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_18> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_26> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_34> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_42> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_3> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_11> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_19> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_27> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_35> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_43> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_4> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_12> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_20> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_28> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_36> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_44> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_5> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_13> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_21> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_29> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_37> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_45> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_6> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_14> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_22> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_30> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_38> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_46> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_7> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_15> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_23> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_31> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_39> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_47> is unconnected in block <fir1>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_0> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_8> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_16> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_24> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_32> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_40> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_1> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_9> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_17> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_25> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_33> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_41> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_2> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_10> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_18> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_26> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_34> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_42> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_3> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_11> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_19> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_27> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_35> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_43> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_4> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_12> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_20> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_28> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_36> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_44> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_5> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_13> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_21> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_29> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_37> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_45> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_6> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_14> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_22> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_30> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_38> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_46> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_7> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_15> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_23> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_31> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_39> is unconnected in block <fir2>.
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <sr_0_47> is unconnected in block <fir2>.
+WARNING:Xst:1290 - Hierarchical block <mod8_d6> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod8_d5> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod1_d6> is unconnected in block <event_builder>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <mod1_d5> is unconnected in block <event_builder>.
+   It will be removed from the design.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block tmdb_core, actual ratio is 0.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 298
+ Flip-Flops                                            : 298
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : tmdb_core.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 167
+#      GND                         : 6
+#      INV                         : 3
+#      LUT1                        : 15
+#      LUT2                        : 4
+#      LUT3                        : 1
+#      LUT4                        : 4
+#      LUT5                        : 9
+#      LUT6                        : 83
+#      MUXCY                       : 15
+#      MUXF7                       : 8
+#      VCC                         : 3
+#      XORCY                       : 16
+# FlipFlops/Latches                : 314
+#      FD                          : 288
+#      FDC                         : 2
+#      FDCE                        : 8
+#      ODDR2                       : 16
+# RAMS                             : 8
+#      RAMB8BWER                   : 8
+# Clock Buffers                    : 4
+#      BUFG                        : 4
+# IO Buffers                       : 318
+#      IBUF                        : 265
+#      IBUFG                       : 1
+#      IOBUF                       : 8
+#      OBUF                        : 44
+# DCMs                             : 1
+#      DCM_SP                      : 1
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx150tfgg676-3 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:             307  out of  184304     0%  
+ Number of Slice LUTs:                  119  out of  92152     0%  
+    Number used as Logic:               119  out of  92152     0%  
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:    401
+   Number with an unused Flip Flop:      94  out of    401    23%  
+   Number with an unused LUT:           282  out of    401    70%  
+   Number of fully used LUT-FF pairs:    25  out of    401     6%  
+   Number of unique control sets:         5
+
+IO Utilization: 
+ Number of IOs:                         332
+ Number of bonded IOBs:                 317  out of    396    80%  
+    IOB Flip Flops/Latches:               7
+
+Specific Feature Utilization:
+ Number of Block RAM/FIFO:                4  out of    268     1%  
+    Number using Block RAM only:          4
+ Number of BUFG/BUFGCTRLs:                4  out of     16    25%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+clk_in<0>                          | DCM_SP:CLK0            | 338   |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -3
+
+   Minimum period: 1.989ns (Maximum Frequency: 502.702MHz)
+   Minimum input arrival time before clock: 3.270ns
+   Maximum output required time after clock: 7.984ns
+   Maximum combinational path delay: 6.809ns
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk_in<0>'
+  Clock period: 1.989ns (frequency: 502.702MHz)
+  Total number of paths / destination ports: 511 / 362
+-------------------------------------------------------------------------
+Delay:               1.989ns (Levels of Logic = 17)
+  Source:            cntr_0 (FF)
+  Destination:       cntr_15 (FF)
+  Source Clock:      clk_in<0> rising
+  Destination Clock: clk_in<0> rising
+
+  Data Path: cntr_0 to cntr_15
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q               2   0.447   0.616  cntr_0 (cntr_0)
+     INV:I->O              1   0.206   0.000  Mcount_cntr_lut<0>_INV_0 (Mcount_cntr_lut<0>)
+     MUXCY:S->O            1   0.172   0.000  Mcount_cntr_cy<0> (Mcount_cntr_cy<0>)
+     MUXCY:CI->O           1   0.019   0.000  Mcount_cntr_cy<1> (Mcount_cntr_cy<1>)
+     MUXCY:CI->O           1   0.019   0.000  Mcount_cntr_cy<2> (Mcount_cntr_cy<2>)
+     MUXCY:CI->O           1   0.019   0.000  Mcount_cntr_cy<3> (Mcount_cntr_cy<3>)
+     MUXCY:CI->O           1   0.019   0.000  Mcount_cntr_cy<4> (Mcount_cntr_cy<4>)
+     MUXCY:CI->O           1   0.019   0.000  Mcount_cntr_cy<5> (Mcount_cntr_cy<5>)
+     MUXCY:CI->O           1   0.019   0.000  Mcount_cntr_cy<6> (Mcount_cntr_cy<6>)
+     MUXCY:CI->O           1   0.019   0.000  Mcount_cntr_cy<7> (Mcount_cntr_cy<7>)
+     MUXCY:CI->O           1   0.019   0.000  Mcount_cntr_cy<8> (Mcount_cntr_cy<8>)
+     MUXCY:CI->O           1   0.019   0.000  Mcount_cntr_cy<9> (Mcount_cntr_cy<9>)
+     MUXCY:CI->O           1   0.019   0.000  Mcount_cntr_cy<10> (Mcount_cntr_cy<10>)
+     MUXCY:CI->O           1   0.019   0.000  Mcount_cntr_cy<11> (Mcount_cntr_cy<11>)
+     MUXCY:CI->O           1   0.019   0.000  Mcount_cntr_cy<12> (Mcount_cntr_cy<12>)
+     MUXCY:CI->O           1   0.019   0.000  Mcount_cntr_cy<13> (Mcount_cntr_cy<13>)
+     MUXCY:CI->O           0   0.019   0.000  Mcount_cntr_cy<14> (Mcount_cntr_cy<14>)
+     XORCY:CI->O           1   0.180   0.000  Mcount_cntr_xor<15> (Result<15>)
+     FD:D                      0.102          cntr_15
+    ----------------------------------------
+    Total                      1.989ns (1.373ns logic, 0.616ns route)
+                                       (69.0% logic, 31.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk_in<0>'
+  Total number of paths / destination ports: 280 / 271
+-------------------------------------------------------------------------
+Offset:              3.270ns (Levels of Logic = 3)
+  Source:            vme_stb (PAD)
+  Destination:       vme/r_gpa_0 (FF)
+  Destination Clock: clk_in<0> rising
+
+  Data Path: vme_stb to vme/r_gpa_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             2   1.222   0.721  vme_stb_IBUF (vme_stb_IBUF)
+     begin scope: 'vme:vme_stb'
+     LUT2:I0->O            8   0.203   0.802  vme_rw_vme_stb_AND_9_o1 (vme_rw_vme_stb_AND_9_o)
+     FDCE:CE                   0.322          r_gpa_0
+    ----------------------------------------
+    Total                      3.270ns (1.747ns logic, 1.523ns route)
+                                       (53.4% logic, 46.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clk_in<0>'
+  Total number of paths / destination ports: 450 / 24
+-------------------------------------------------------------------------
+Offset:              7.984ns (Levels of Logic = 7)
+  Source:            data_buffering/Mram_buff6 (RAM)
+  Destination:       vme_data<3> (PAD)
+  Source Clock:      clk_in<0> rising
+
+  Data Path: data_buffering/Mram_buff6 to vme_data<3>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     RAMB8BWER:CLKBRDCLK->DOBDO15    1   1.850   0.827  Mram_buff6 (buff_r<211>)
+     LUT6:I2->O            1   0.203   0.827  Mmux_bc_data_810 (Mmux_bc_data_810)
+     LUT6:I2->O            1   0.203   0.000  Mmux_bc_data_33 (Mmux_bc_data_33)
+     MUXF7:I1->O           1   0.140   0.580  Mmux_bc_data_2_f7_2 (bc_data<3>)
+     end scope: 'data_buffering:bc_data<3>'
+     begin scope: 'vme:adc_data<3>'
+     LUT5:I4->O            1   0.205   0.579  Mmux_mux_out41 (mux_out<3>)
+     IOBUF:I->IO               2.571          vme_data_3_IOBUF (vme_data<3>)
+     end scope: 'vme:vme_data<3>'
+    ----------------------------------------
+    Total                      7.984ns (5.172ns logic, 2.812ns route)
+                                       (64.8% logic, 35.2% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 56 / 8
+-------------------------------------------------------------------------
+Delay:               6.809ns (Levels of Logic = 5)
+  Source:            vme_addr<2> (PAD)
+  Destination:       vme_data<0> (PAD)
+
+  Data Path: vme_addr<2> to vme_data<0>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             2   1.222   0.864  vme_addr_2_IBUF (vme_addr_2_IBUF)
+     begin scope: 'vme:vme_addr<2>'
+     LUT4:I0->O            8   0.203   1.167  _n0066<5>1 (_n0066)
+     LUT6:I0->O            1   0.203   0.579  Mmux_mux_out11 (mux_out<0>)
+     IOBUF:I->IO               2.571          vme_data_0_IOBUF (vme_data<0>)
+     end scope: 'vme:vme_data<0>'
+    ----------------------------------------
+    Total                      6.809ns (4.199ns logic, 2.610ns route)
+                                       (61.7% logic, 38.3% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock clk_in<0>
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+clk_in<0>      |    1.989|         |         |         |
+---------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 28.00 secs
+Total CPU time to Xst completion: 27.61 secs
+ 
+--> 
+
+Total memory usage is 331352 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :  671 (   0 filtered)
+Number of infos    :   20 (   0 filtered)
+
